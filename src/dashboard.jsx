@@ -7,8 +7,12 @@ import { fetchProfile } from "./API_Scripts/getProfile";
 const clientId = 'c7d7db2ffd7e4d229d6c8977e5792dee';
 const params = new URLSearchParams(window.location.search);
 const code = params.get("code");
-const accessToken = await getAccessToken(clientId, code);
-let profile = await fetchProfile(accessToken);
+let profile;
+async function init() {
+  const accessToken = await getAccessToken(clientId, code);
+  profile = await fetchProfile(accessToken);
+}
+init()
 
 function Dashboard() {
   const location = useLocation();
