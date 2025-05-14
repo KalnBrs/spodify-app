@@ -7,7 +7,6 @@ import Routing from './routing.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Routing />
-    <Login />
+    <App />
   </StrictMode>,
 )
