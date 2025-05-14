@@ -29,6 +29,7 @@ function Dashboard() {
     return <p>Loading...</p>;
   }
 
+  console.log(profile)
   return (
     <>
       <h1>Hello</h1>
