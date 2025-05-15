@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { getAccessToken } from "./API_Scripts/getAccess";
 import { fetchProfile } from "./API_Scripts/getProfile";
+import { Card } from './Components/Card.jsx'
 
 const clientId = 'c7d7db2ffd7e4d229d6c8977e5792dee';
 
@@ -32,11 +33,13 @@ function Dashboard() {
   console.log(profile)
   return (
     <>
-      <h1>Hello</h1>
-      <h1>{profile.username}</h1>
-      <p>{profile.email}</p>
-      <img src={profile.images?.[0]?.url} alt="Profile" />
-      <p>{profile.product}</p>
+      <Card >
+        <h1>Hello</h1>
+        <h1 id='username'>{profile.display_name}</h1>
+        <p id='email'>{profile.email}</p>
+        <img src={profile.images?.[0]?.url} alt="Profile" id='profilePic' />
+        <p id='product'>{profile.product}</p>
+      </Card>
     </>
   );
 }
