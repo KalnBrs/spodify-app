@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { getAccessToken } from "./API_Scripts/getAccess";
 import { fetchProfile } from "./API_Scripts/getProfile";
-import { ProfileCard } from './Components/ProfileCard.jsx'
+import { ProfileCard } from './Components/ProfileCard'
 
 const clientId = 'c7d7db2ffd7e4d229d6c8977e5792dee';
 
