@@ -5,11 +5,11 @@ import { fetchProfile } from "./API_Scripts/getProfile";
 
 import './dashboard.css'
 
-import ProfileCard from './Components/ProfileCard'
-import Song from './Components/Song'
+import ProfileCard from './Components/ProfileCard';
+import Song from './Components/Song';
 import Artist from "./Components/Artist";
-import Playlist from './Components/Playlist'
-import Recomend from './Components/Recomend'
+import Playlist from './Components/Playlist';
+import Recomend from './Components/Recomend';
 import Mood from "./Components/Mood";
 
 const clientId = 'c7d7db2ffd7e4d229d6c8977e5792dee';
@@ -39,6 +39,7 @@ function Dashboard() {
   }
 
   console.log(profile)
+  console.log({ ProfileCard, Song, Artist, Playlist, Recomend, Mood });
   return (
     <div className="dashboard">
       <div className="container1">

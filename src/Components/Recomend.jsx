@@ -15,4 +15,4 @@ function Recomend(props) {
   )
 }
 
-export default Recomend  
+export default Recomend;

@@ -1,5 +1,4 @@
 export async function getAccessToken(clientId, code) {
-  console.log(localStorage)
   const verifier = localStorage.getItem("verifier");
 
   const params = new URLSearchParams();
