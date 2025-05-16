@@ -43,7 +43,7 @@ function Dashboard() {
     <div className="dashboard">
       <div className="container1">
         <div className="card">
-          <ProfileCard  />
+          <ProfileCard profile={profile} />
         </div>
         <div className="card" id='tracks'>
           <h1 className="header">Top Tracks</h1>
