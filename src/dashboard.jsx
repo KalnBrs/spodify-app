@@ -34,9 +34,9 @@ function Dashboard() {
     init();
   }, [location.search]);
 
-  // if (!profile) {
-  //   return <p>Loading...</p>;
-  // }
+  if (!profile) {
+    return <p>Loading...</p>;
+  }
 
   console.log(profile)
   return (
