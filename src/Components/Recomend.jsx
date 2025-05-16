@@ -8,7 +8,7 @@ function Recomend(props) {
       <Song />
       <div className='buttonContainer'>
         <button className='recomendButton'>
-          <img src="src/assets/plus.svg" alt="" className='recomendButton'/>
+          <img src="./assets/plus.svg" alt="" className='recomendButton'/>
         </button>
       </div>
     </div>

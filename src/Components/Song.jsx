@@ -12,7 +12,7 @@ function Song(props) {
       </div>
       <div className='buttonContainer'>
         <button className='queue'>
-          <img src="src/assets/queue.svg" alt="" className='queue'/>
+          <img src="./assets/queue.svg" alt="" className='queue'/>
         </button>
       </div>
     </div>
