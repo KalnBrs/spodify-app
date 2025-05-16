@@ -8,16 +8,16 @@ function Playlist(props) {
         <div className='names playlistName'>
           <p className='playlistName'>Playlist</p>
         </div>
-        <img src="./assets/person.svg" alt="" className='playlistPerson'/>
+        <img src="public/assets/person.svg" alt="" className='playlistPerson'/>
       </div>
       <div>
         <p className='playlistTime'>98:00 - 98 tracks</p>
         <div className='playlistButtons'>
           <button className='playlistIcons edit'>
-            <img src="./assets/edit.svg" alt="" className='playlistIcons edit'/>
+            <img src="public/edit.svg" alt="" className='playlistIcons edit'/>
           </button>
           <button className='playlistIcons trash'>
-            <img src="./assets/trash.svg" alt="" className='playlistIcons trash'/>
+            <img src="public/trash.svg" alt="" className='playlistIcons trash'/>
           </button>
         </div>
       </div>
