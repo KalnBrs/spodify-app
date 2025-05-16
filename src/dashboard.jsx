@@ -12,7 +12,7 @@ import Playlist from './Components/Playlist'
 import Recomend from './Components/Recomend'
 import Mood from "./Components/Mood";
 
-const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
+const clientId = 'c7d7db2ffd7e4d229d6c8977e5792dee';
 
 function Dashboard() {
   const [profile, setProfile] = useState(null);
