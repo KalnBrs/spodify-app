@@ -2,9 +2,17 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { getAccessToken } from "./API_Scripts/getAccess";
 import { fetchProfile } from "./API_Scripts/getProfile";
-import ProfileCard from './Components/ProfileCard'
 
-const clientId = 'c7d7db2ffd7e4d229d6c8977e5792dee';
+import './dashboard.css'
+
+import ProfileCard from './Components/ProfileCard'
+import Song from './Components/Song'
+import Artist from "./Components/Artist";
+import Playlist from './Components/Playlist'
+import Recomend from './Components/Recomend'
+import Mood from "./Components/Mood";
+
+const clientId = import.meta.env.VITE_SPOTIFY_CLIENT_ID;
 
 function Dashboard() {
   const [profile, setProfile] = useState(null);
@@ -26,17 +34,78 @@ function Dashboard() {
     init();
   }, [location.search]);
 
-  if (!profile) {
-    return <p>Loading...</p>;
-  }
+  // if (!profile) {
+  //   return <p>Loading...</p>;
+  // }
 
   console.log(profile)
   return (
-    <>
-      <div >
-        <ProfileCard profile={profile} />
+    <div className="dashboard">
+      <div className="container1">
+        <div className="card">
+          <ProfileCard  />
+        </div>
+        <div className="card" id='tracks'>
+          <h1 className="header">Top Tracks</h1>
+          <Song />
+          <Song /> 
+          <Song /> 
+          <Song />
+          <Song /> 
+        </div>
+        <div className="card" id='artists'>
+          <h1 className="header">Top Artists</h1>
+          <Artist />
+          <Artist />
+          <Artist />
+          <Artist />
+          <Artist />
+        </div>
+        <div className="card" id='playlists'>
+          <h1 className="header">Saved Playlists</h1>
+          <Playlist />
+          <Playlist />
+          <Playlist />
+          <Playlist />
+          <Playlist />
+        </div>
+        <div className="card" id='search'>
+          
+        </div>
+        <div className="card" id='recomend'>
+          <h1 className="header">Recomended Songs</h1>
+          <Recomend />
+          <Recomend />
+          <Recomend />
+          <Recomend />
+          <Recomend />
+        </div>
       </div>
-    </>
+      <div className="container2">
+        <div className="card">
+          <h1 className="header">Mood Breakdown</h1>
+          <Mood mood='Energetic' />
+          <Mood mood='Happy'/>
+          <Mood mood='Chill'/>
+          <Mood mood='Sad'/>
+          <Mood mood='Dance-able'/>
+          <Mood mood='Aggressive'/>
+          <Mood mood='Romantic'/>
+          <Mood mood='Ambient'/>
+        </div>
+        <div className="card">
+          <h1 className="header">Recent Plays</h1>
+          <Song />
+          <Song />
+          <Song />
+          <Song />
+          <Song />
+          <Song />
+          <Song />
+          <Song />
+        </div>
+      </div>
+    </div>
   );
 }
 

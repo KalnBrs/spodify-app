@@ -1,0 +1,15 @@
+div.artistContainer {
+  display: inline-flex;
+  flex-direction: row;
+}
+
+div.artistName {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+p.artistName {
+  font-size: 2vw;
+  font-weight: bold;
+}
