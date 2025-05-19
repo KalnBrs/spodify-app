@@ -20,11 +20,14 @@ function Dashboard() {
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
+    code = localStorage.getItem('code')
     const code = params.get("code");
-    localStorage.setItem('code', code);
+    if (code) {
+      localStorage.setItem('code', code);
+    }
 
     async function init() {
-      if (code) {
+      if (localStorage.getItem('code')) {
         console.log("Spotify authorization code:", code);
         const accessToken = await getAccessToken(clientId, code);
         const fetchedProfile = await fetchProfile(accessToken);
