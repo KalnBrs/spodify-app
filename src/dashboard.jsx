@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { getAccessToken } from "./API_Scripts/getAccess";
 import { fetchProfile } from "./API_Scripts/getProfile";
+import { refreshAccessToken } from "./API_Scripts/refreshAccess";
 
 import './dashboard.css'
 
@@ -26,11 +27,32 @@ function Dashboard() {
     }
 
     async function init() {
-      if (localStorage.getItem('code')) {
-        console.log("Spotify authorization code:", code);
-        const accessToken = await getAccessToken(clientId, code);
-        const fetchedProfile = await fetchProfile(accessToken);
+      const token = localStorage.getItem('access_token');
+      const expiry = localStorage.getItem('token_expiry');
+      const refreshToken = localStorage.getItem('refresh_token');
+    
+      if (token && expiry && Date.now() < parseInt(expiry)) {
+        const fetchedProfile = await fetchProfile(token);
         setProfile(fetchedProfile);
+        return;
+      }
+    
+      if (refreshToken) {
+        const newToken = await refreshAccessToken(clientId, refreshToken);
+        if (newToken) {
+          const fetchedProfile = await fetchProfile(newToken);
+          setProfile(fetchedProfile);
+          return;
+        }
+      }
+    
+      const storedCode = localStorage.getItem('code');
+      if (storedCode) {
+        const tokenData = await getAccessToken(clientId, storedCode);
+        if (tokenData?.access_token) {
+          const fetchedProfile = await fetchProfile(tokenData.access_token);
+          setProfile(fetchedProfile);
+        }
       }
     }
 
