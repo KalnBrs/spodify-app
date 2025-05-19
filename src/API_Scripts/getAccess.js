@@ -8,12 +8,27 @@ export async function getAccessToken(clientId, code) {
   params.append("redirect_uri", "https://spodify-app.vercel.app/dashboard");
   params.append("code_verifier", verifier);
 
-  const result = await fetch("https://accounts.spotify.com/api/token", {
+  const response = await fetch("https://accounts.spotify.com/api/token", {
     method: "POST",
     headers: { "Content-Type": "application/x-www-form-urlencoded" },
     body: params
   });
 
-  const { access_token } = await result.json();
-  return access_token;
+  if (!response.ok) {
+    console.error("Failed to get access token:", await response.text());
+    return null;
+  }
+
+  const data = await response.json();
+
+  // Optional: store refresh token for later (if you plan to implement refreshing)
+  localStorage.setItem("access_token", data.access_token);
+  localStorage.setItem("refresh_token", data.refresh_token); // if present
+  localStorage.setItem("token_expiry", (Date.now() + data.expires_in * 1000).toString());
+
+  return {
+    access_token: data.access_token,
+    refresh_token: data.refresh_token, // save for later use
+    expires_in: data.expires_in
+  };
 }
