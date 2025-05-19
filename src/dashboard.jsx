@@ -21,6 +21,7 @@ function Dashboard() {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const code = params.get("code");
+    localStorage.setItem('code', code);
 
     async function init() {
       if (code) {
@@ -39,7 +40,7 @@ function Dashboard() {
   }
 
   console.log(profile)
-  console.log({ ProfileCard, Song, Artist, Playlist, Recomend, Mood });
+  // console.log({ ProfileCard, Song, Artist, Playlist, Recomend, Mood });
   return (
     <div className="dashboard">
       <div className="container1">
