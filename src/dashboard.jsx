@@ -22,6 +22,7 @@ function Dashboard() {
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const code = params.get("code");
+
     if (code) {
       localStorage.setItem('code', code);
     }
@@ -59,6 +60,7 @@ function Dashboard() {
     init();
   }, [location.search]);
 
+  console.log(profile)
   if (!profile) {
     return <p>Loading...</p>;
   }
