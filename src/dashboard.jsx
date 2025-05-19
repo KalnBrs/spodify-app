@@ -20,7 +20,6 @@ function Dashboard() {
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
-    code = localStorage.getItem('code')
     const code = params.get("code");
     if (code) {
       localStorage.setItem('code', code);
