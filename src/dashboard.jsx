@@ -12,6 +12,7 @@ import Artist from "./Components/Artist";
 import Playlist from './Components/Playlist';
 import Recomend from './Components/Recomend';
 import Mood from "./Components/Mood";
+import Play from "./Components/Play";
 
 const clientId = 'c7d7db2ffd7e4d229d6c8977e5792dee';
 
@@ -60,18 +61,20 @@ function Dashboard() {
     init();
   }, [location.search]);
 
-  console.log(profile)
-  if (!profile) {
-    return <p>Loading...</p>;
-  }
+  // Uncomment for production
+  // if (!profile) {
+  //   return <p>Loading...</p>;
+  // }
 
   console.log(profile)
   // console.log({ ProfileCard, Song, Artist, Playlist, Recomend, Mood });
   return (
     <div className="dashboard">
+      <Play />
       <div className="container1">
         <div className="card">
-          <ProfileCard profile={profile} />
+          {/* profile={profile} */}
+          <ProfileCard  />
         </div>
         <div className="card" id='tracks'>
           <h1 className="header">Top Tracks</h1>

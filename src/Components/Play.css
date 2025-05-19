@@ -1,0 +1,12 @@
+.play {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border: 2px solid #191F22;
+  width: 75vw;
+  height: 5vw;
+  background-color: #0A0C0E;
+  z-index: 4;
+  margin: auto;
+}
