@@ -49,7 +49,7 @@ div.names>p {
 }
 
 p.song {
-  font-size: 1em;
+  font-size: 1vw;
   font-weight: bold;
   white-space: nowrap;
   overflow: hidden;
