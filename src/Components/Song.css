@@ -54,7 +54,7 @@ p.song {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 20vw; /* or however wide you want the text area */
+  max-width: 15vw; 
 }
 
 p.artist{
