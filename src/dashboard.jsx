@@ -89,9 +89,9 @@ function Dashboard() {
   }, [location.search]);
 
   // Uncomment for production
-  // if (!profile) {
-  //   return <p>Loading...</p>;
-  // }
+  if (!profile) {
+    return <p>Loading...</p>;
+  }
 
   console.log(profile)
   console.log(tracks.items[0])
