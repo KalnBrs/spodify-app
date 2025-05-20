@@ -1,7 +1,7 @@
 import './Song.css'
 
 function Song(props) {
-  console.log(props)
+  console.log(props.topTracks)
   return (
     <div className='container'>
       <div onClick='' >

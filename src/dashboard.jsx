@@ -20,7 +20,7 @@ const clientId = 'c7d7db2ffd7e4d229d6c8977e5792dee';
 
 function Dashboard() {
   const [profile, setProfile] = useState(null);
-  const [topTracks, setTopTracks] = useState(null)
+  const [tracks, setTopTracks] = useState(null)
   const location = useLocation();
 
   useEffect(() => {
@@ -94,7 +94,7 @@ function Dashboard() {
   // }
 
   console.log(profile)
-  console.log(topTracks.items[0])
+  console.log(tracks.items[0])
   return (
     <div className="dashboard">
       <Play />
@@ -104,11 +104,11 @@ function Dashboard() {
         </div>
         <div className="card" id='tracks'>
           <h1 className="header">Top Tracks</h1>
-          <Song topTracks={topTracks.items[0]}/>
-          <Song topTracks={topTracks.items[1]}/> 
-          <Song topTracks={topTracks.items[2]}/> 
-          <Song topTracks={topTracks.items[3]}/>
-          <Song topTracks={topTracks.items[4]}/> 
+          <Song topTracks={tracks.items[0]}/>
+          <Song topTracks={tracks.items[1]}/> 
+          <Song topTracks={tracks.items[2]}/> 
+          <Song topTracks={tracks.items[3]}/>
+          <Song topTracks={tracks.items[4]}/> 
         </div>
         <div className="card" id='artists'>
           <h1 className="header">Top Artists</h1>
