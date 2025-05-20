@@ -1,8 +1,14 @@
+import { useEffect } from 'react';
 import { getTotalTime } from '../API_Scripts/getTotalTime';
 
 import './Playlist.css';
 
-async function Playlist(props) {
+function Playlist(props) {
+  const playlistTime = '';
+  useEffect(() => {
+    playlistTime = getTotalTime(token, playlist.href)
+  }, [location.search])
+
   const playlist = props.playlist;
   const token = props.token;
   if (!playlist) return null;
@@ -11,7 +17,6 @@ async function Playlist(props) {
   const playlistImage = playlist.images?.[0]?.url;
   const playlistColab = playlist.collaborative;
   const playlistNumTracks = playlist.tracks?.total;
-  const playlistTime = await getTotalTime(token, playlist.href)
   const colabSrc = playlistColab ? '/colab.svg' : '/person.svg'
 
   return (
