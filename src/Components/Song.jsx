@@ -1,11 +1,11 @@
 import './Song.css'
 
 function Song(props) {
-  console.log(props.topTracks)
+  const track = props.topTracks;
   return (
     <div className='container'>
       <div onClick='' >
-        <img src="https://i.scdn.co/image/ab6775700000ee851250c2c9f7672384da18f4ca" alt="" className='cover'/>
+        <img src={track['album']['images'][0].url} alt="" className='cover'/>
         <div className='names'>
           <p className='song'>Song</p>
           <p className="artist">Artist</p>
