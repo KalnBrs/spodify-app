@@ -70,7 +70,7 @@ function Dashboard() {
         localStorage.removeItem("refresh_token");
         localStorage.removeItem("token_expiry");
 
-        const tokenData = await getAccessToken(clientId, code, redirectUri);
+        const tokenData = await getAccessToken(clientId, code);
         if (tokenData?.access_token) {
           localStorage.setItem("access_token", tokenData.access_token);
           localStorage.setItem("refresh_token", tokenData.refresh_token);
