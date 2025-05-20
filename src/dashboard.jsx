@@ -34,6 +34,7 @@ function Dashboard() {
       const token = localStorage.getItem('access_token');
       const expiry = localStorage.getItem('token_expiry');
       const refreshToken = localStorage.getItem('refresh_token');
+      console.log(await getTop(token, 'tracks'))
     
       if (token && expiry && Date.now() < parseInt(expiry)) {
         const fetchedProfile = await fetchProfile(token);
@@ -58,8 +59,8 @@ function Dashboard() {
           setProfile(fetchedProfile);
         }
       }
+
       
-      console.log(getTop(localStorage.getItem('access_token'), 'tracks'))
     }
 
     init();
