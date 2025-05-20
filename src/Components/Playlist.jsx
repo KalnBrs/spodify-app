@@ -2,7 +2,9 @@ import { getTotalTime } from '../API_Scripts/getTotalTime';
 
 import './Playlist.css';
 
-function Playlist({playlist}, {token}) {
+function Playlist(props) {
+  const playlist = props.playlist;
+  const token = props.token;
   if (!playlist) return null;
 
   const playlistName = playlist.name;
