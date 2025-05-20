@@ -4,7 +4,7 @@ export async function getTotalTime(token, apiLink) {
   });
 
   let sum = 0;
-  result.json().items.map((item) => {
+  result.items.map((item) => {
     sum += item?.track?.duration_ms;
   })
 
