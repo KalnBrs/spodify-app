@@ -79,7 +79,7 @@ function Dashboard() {
 
           const profile = await fetchProfile(tokenData.access_token);
           setProfile(profile);
-          const topTracks = await getTop(newTokenData, 'tracks');
+          const topTracks = await getTop(tokenData.access_token, 'tracks');
           setTopTracks(topTracks);
         }
       }
