@@ -31,38 +31,57 @@ function Dashboard() {
     }
 
     async function init() {
+      const clientId = "<YOUR_CLIENT_ID>";
       const token = localStorage.getItem('access_token');
       const expiry = localStorage.getItem('token_expiry');
       const refreshToken = localStorage.getItem('refresh_token');
-      console.log(await getTop(token, 'tracks'))
-    
+  
       if (token && expiry && Date.now() < parseInt(expiry)) {
         const fetchedProfile = await fetchProfile(token);
         setProfile(fetchedProfile);
+  
+        const topTracks = await getTop(token, 'tracks');
+        console.log(topTracks);
+  
         return;
       }
-    
+  
       if (refreshToken) {
-        const newToken = await refreshAccessToken(clientId, refreshToken);
-        if (newToken) {
-          const fetchedProfile = await fetchProfile(newToken);
+        const newTokenData = await refreshAccessToken(clientId, refreshToken);
+        if (newTokenData?.access_token) {
+          localStorage.setItem('access_token', newTokenData.access_token);
+          localStorage.setItem('token_expiry', Date.now() + newTokenData.expires_in * 1000);
+  
+          const fetchedProfile = await fetchProfile(newTokenData.access_token);
           setProfile(fetchedProfile);
+  
+          const topTracks = await getTop(newTokenData.access_token, 'tracks');
+          console.log(topTracks);
+  
           return;
         }
       }
-    
-      const storedCode = localStorage.getItem('code');
-      if (storedCode) {
-        const tokenData = await getAccessToken(clientId, storedCode);
+  
+      const urlParams = new URLSearchParams(window.location.search);
+      const code = urlParams.get('code');
+      if (code) {
+        localStorage.setItem('code', code);
+  
+        const tokenData = await getAccessToken(clientId, code);
         if (tokenData?.access_token) {
+          localStorage.setItem('access_token', tokenData.access_token);
+          localStorage.setItem('refresh_token', tokenData.refresh_token);
+          localStorage.setItem('token_expiry', Date.now() + tokenData.expires_in * 1000);
+  
           const fetchedProfile = await fetchProfile(tokenData.access_token);
           setProfile(fetchedProfile);
+  
+          const topTracks = await getTop(tokenData.access_token, 'tracks');
+          console.log(topTracks);
         }
       }
-
-      
     }
-
+  
     init();
   }, [location.search]);
 
