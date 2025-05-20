@@ -99,6 +99,7 @@ function Dashboard() {
 
   console.log(profile)
   console.log(tracks)
+  console.log(artists)
   return (
     <div className="dashboard">
       <Play />
@@ -115,7 +116,7 @@ function Dashboard() {
         <div className="card" id='artists'>
           <h1 className="header">Top Artists</h1>
           {artists?.items?.slice(0, 5).map((artist) => (
-            <Artist artist={artist} />
+            <Artist artist={artists} />
           ))}
         </div>
         <div className="card" id='playlists'>
