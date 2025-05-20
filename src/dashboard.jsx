@@ -20,16 +20,12 @@ const clientId = 'c7d7db2ffd7e4d229d6c8977e5792dee';
 
 function Dashboard() {
   const [profile, setProfile] = useState(null);
-  const [tracks, setTopTracks] = useState(1)
+  const [tracks, setTopTracks] = useState(null)
   const location = useLocation();
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const code = params.get("code");
-
-    if (code) {
-      localStorage.setItem('code', code);
-    }
 
     async function init() {
       const token = localStorage.getItem('access_token');
@@ -84,6 +80,7 @@ function Dashboard() {
         }
       }
     }
+    console.log(tracks)
   
     init();
   }, [location.search]);
