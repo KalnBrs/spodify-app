@@ -4,6 +4,7 @@ import { getAccessToken } from "./API_Scripts/getAccess";
 import { fetchProfile } from "./API_Scripts/getProfile";
 import { refreshAccessToken } from "./API_Scripts/refreshAccess";
 import { getTop } from "./API_Scripts/getTop";
+import { getCurrentUsersPlaylists } from "./API_Scripts/getPlaylist";
 
 import './dashboard.css'
 
@@ -22,6 +23,8 @@ function Dashboard() {
   const [profile, setProfile] = useState(null);
   const [tracks, setTopTracks] = useState(null);
   const [artists, setTopArtist] = useState(null);
+  const [currPlaylist, setCurrPlaylist] = useState(null);
+
 
   const location = useLocation();
 
@@ -57,6 +60,8 @@ function Dashboard() {
           setTopTracks(topTracks);
           const topArtist = await getTop(tokenData.access_token, 'artists');
           setTopArtist(topArtist)
+          const currPlaylist = await getCurrentUsersPlaylists(tokenData.access_token)
+          setCurrPlaylist(currPlaylist);
         }
       }
 
@@ -67,6 +72,8 @@ function Dashboard() {
         setTopTracks(topTracks);
         const topArtist = await getTop(token, 'artists');
         setTopArtist(topArtist)
+        const currPlaylist = await getCurrentUsersPlaylists(token)
+        setCurrPlaylist(currPlaylist);
   
         return;
       }
@@ -77,13 +84,13 @@ function Dashboard() {
             
           const fetchedProfile = await fetchProfile(newTokenData);
           setProfile(fetchedProfile);
-  
           const topTracks = await getTop(newTokenData, 'tracks');
           setTopTracks(topTracks);
-
           const topArtist = await getTop(newTokenData, 'artists');
           setTopArtist(topArtist)
-  
+          const currPlaylist = await getCurrentUsersPlaylists(newTokenData)
+          setCurrPlaylist(currPlaylist);
+
           return;
         }
       }
@@ -100,6 +107,7 @@ function Dashboard() {
   console.log(profile)
   console.log(tracks)
   console.log(artists)
+  console.log(currPlaylist)
   return (
     <div className="dashboard">
       <Play />
@@ -121,11 +129,9 @@ function Dashboard() {
         </div>
         <div className="card" id='playlists'>
           <h1 className="header">Saved Playlists</h1>
-          <Playlist />
-          <Playlist />
-          <Playlist />
-          <Playlist />
-          <Playlist />
+          {currPlaylist?.items?.slice(0, 5).map((playlist) => (
+            <Playlist playlist={playlist} token={localStorage.getItem('access_token')}/>
+          ))}
         </div>
         <div className="card" id='search'>
           <Search />

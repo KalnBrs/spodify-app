@@ -1,17 +1,28 @@
+import { getTotalTime } from '../API_Scripts/getTotalTime';
+
 import './Playlist.css';
 
-function Playlist(props) {
+function Playlist({playlist}, {token}) {
+  if (!playlist) return null;
+
+  const playlistName = playlist.name;
+  const playlistImage = playlist.images?.[0]?.url;
+  const playlistColab = playlist.collaborative;
+  const playlistNumTracks = playlist.tracks?.total;
+  const playlistTime = getTotalTime(token, playlist.href)
+  const colabSrc = playlistColab ? '/colab.svg' : '/person.svg'
+
   return (
     <div className='container'>
       <div onClick='' className='playlistContainer'>
-        <img src="https://i.scdn.co/image/ab6775700000ee851250c2c9f7672384da18f4ca" alt="" className='cover'/>
+        <img src={playlistImage} alt="" className='cover'/>
         <div className='names playlistName'>
-          <p className='playlistName'>Playlist</p>
+          <p className='playlistName'>{playlistName}</p>
         </div>
-        <img src="/person.svg" alt="" className='playlistPerson'/>
+        <img src={colabSrc} alt="" className='playlistPerson'/>
       </div>
       <div>
-        <p className='playlistTime'>98:00 - 98 tracks</p>
+        <p className='playlistTime'>{playlistTime} - {playlistNumTracks} tracks</p>
         <div className='playlistButtons'>
           <button className='playlistIcons edit'>
             <img src="/edit.svg" alt="" className='playlistIcons edit'/>
