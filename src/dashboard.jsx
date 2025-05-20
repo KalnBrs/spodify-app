@@ -64,7 +64,7 @@ function Dashboard() {
   
       const urlParams = new URLSearchParams(window.location.search);
       const code = urlParams.get('code');
-      if (code) {
+      if (code && !localStorage.getItem('access_token')) {
         localStorage.setItem('code', code);
   
         const tokenData = await getAccessToken(clientId, code);
