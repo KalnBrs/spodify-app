@@ -94,6 +94,7 @@ function Dashboard() {
   // }
 
   console.log(profile)
+  console.log(topTracks.items[0])
   return (
     <div className="dashboard">
       <Play />
