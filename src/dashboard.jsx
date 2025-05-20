@@ -20,7 +20,9 @@ const clientId = 'c7d7db2ffd7e4d229d6c8977e5792dee';
 
 function Dashboard() {
   const [profile, setProfile] = useState(null);
-  const [tracks, setTopTracks] = useState(null)
+  const [tracks, setTopTracks] = useState(null);
+  const [artists, setTopArtist] = useState(null);
+
   const location = useLocation();
 
   useEffect(() => {
@@ -35,9 +37,10 @@ function Dashboard() {
       if (token && expiry && Date.now() < parseInt(expiry)) {
         const fetchedProfile = await fetchProfile(token);
         setProfile(fetchedProfile);
-  
         const topTracks = await getTop(token, 'tracks');
         setTopTracks(topTracks);
+        const topArtist = await getTop(token, 'artist');
+        setTopArtist(topArtist)
   
         return;
       }
@@ -51,6 +54,9 @@ function Dashboard() {
   
           const topTracks = await getTop(newTokenData, 'tracks');
           setTopTracks(topTracks);
+
+          const topArtist = await getTop(newTokenData, 'artist');
+          setTopArtist(topArtist)
   
           return;
         }
@@ -71,12 +77,14 @@ function Dashboard() {
           localStorage.setItem("token_expiry", Date.now() + tokenData.expires_in * 1000);
 
           // Clean the URL
-          // window.history.replaceState({}, document.title, window.location.pathname);
+          window.history.replaceState({}, document.title, window.location.pathname);
 
           const profile = await fetchProfile(tokenData.access_token);
           setProfile(profile);
           const topTracks = await getTop(tokenData.access_token, 'tracks');
           setTopTracks(topTracks);
+          const topArtist = await getTop(tokenData.access_token, 'artist');
+          setTopArtist(topArtist)
         }
       }
     }
@@ -100,18 +108,15 @@ function Dashboard() {
         </div>
         <div className="card" id='tracks'>
           <h1 className="header">Top Tracks</h1>
-          {tracks?.items?.slice(0, 5).map((track, index) => (
-            <Song topTracks={track}/>
-          ))
-          }          
+          {tracks?.items?.slice(0, 5).map((track) => (
+            <Song track={track}/>
+          ))}          
         </div>
         <div className="card" id='artists'>
           <h1 className="header">Top Artists</h1>
-          <Artist />
-          <Artist />
-          <Artist />
-          <Artist />
-          <Artist />
+          {artists?.items?.slice(0, 5).map((artist) => (
+            <Artist artist={artist} />
+          ))}
         </div>
         <div className="card" id='playlists'>
           <h1 className="header">Saved Playlists</h1>

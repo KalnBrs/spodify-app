@@ -1,11 +1,11 @@
 import './Song.css';
 
-function Song({ topTracks }) {
-  if (!topTracks) return null;
+function Song({ track }) {
+  if (!track) return null;
 
-  const trackName = topTracks.name;
-  const artistName = topTracks.artists?.[0]?.name;
-  const albumImage = topTracks.album?.images?.[0]?.url;
+  const trackName = track.name;
+  const artistName = track.artists?.[0]?.name;
+  const albumImage = track.album?.images?.[0]?.url;
 
   return (
     <div className='container'>
