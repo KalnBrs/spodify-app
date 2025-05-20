@@ -51,6 +51,10 @@ div.names>p {
 p.song {
   font-size: 1.5em;
   font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 20vw; /* or however wide you want the text area */
 }
 
 p.artist{
