@@ -4,7 +4,7 @@ import { getTotalTime } from '../API_Scripts/getTotalTime';
 import './Playlist.css';
 
 function Playlist(props) {
-  const playlistTime = '';
+  let playlistTime = '';
   useEffect(() => {
     playlistTime = getTotalTime(token, playlist.href)
   }, [location.search])
