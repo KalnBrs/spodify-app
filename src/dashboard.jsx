@@ -31,7 +31,6 @@ function Dashboard() {
     }
 
     async function init() {
-      const clientId = "<YOUR_CLIENT_ID>";
       const token = localStorage.getItem('access_token');
       const expiry = localStorage.getItem('token_expiry');
       const refreshToken = localStorage.getItem('refresh_token');
@@ -49,13 +48,11 @@ function Dashboard() {
       if (refreshToken) {
         const newTokenData = await refreshAccessToken(clientId, refreshToken);
         if (newTokenData?.access_token) {
-          localStorage.setItem('access_token', newTokenData.access_token);
-          localStorage.setItem('token_expiry', Date.now() + newTokenData.expires_in * 1000);
-  
-          const fetchedProfile = await fetchProfile(newTokenData.access_token);
+            
+          const fetchedProfile = await fetchProfile(newTokenData);
           setProfile(fetchedProfile);
   
-          const topTracks = await getTop(newTokenData.access_token, 'tracks');
+          const topTracks = await getTop(newTokenData, 'tracks');
           console.log(topTracks);
   
           return;
