@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { getAccessToken } from "./API_Scripts/getAccess";
 import { fetchProfile } from "./API_Scripts/getProfile";
 import { refreshAccessToken } from "./API_Scripts/refreshAccess";
+import { getTop } from "./API_Scripts/getTop";
 
 import './dashboard.css'
 
@@ -13,6 +14,7 @@ import Playlist from './Components/Playlist';
 import Recomend from './Components/Recomend';
 import Mood from "./Components/Mood";
 import Play from "./Components/Play";
+import Search from "./Components/Search";
 
 const clientId = 'c7d7db2ffd7e4d229d6c8977e5792dee';
 
@@ -56,8 +58,10 @@ function Dashboard() {
           setProfile(fetchedProfile);
         }
       }
+
     }
 
+    console.log(getTop(localStorage.getItem('access_token'), 'tracks'))
     init();
   }, [location.search]);
 
@@ -67,7 +71,6 @@ function Dashboard() {
   // }
 
   console.log(profile)
-  // console.log({ ProfileCard, Song, Artist, Playlist, Recomend, Mood });
   return (
     <div className="dashboard">
       <Play />
@@ -101,7 +104,7 @@ function Dashboard() {
           <Playlist />
         </div>
         <div className="card" id='search'>
-          
+          <Search />
         </div>
         <div className="card" id='recomend'>
           <h1 className="header">Recomended Songs</h1>

@@ -1,0 +1,23 @@
+input[type='search'] {
+  color: white;
+  background-color: transparent;
+  border: solid 2px lightgray;
+  border-radius: 5em;
+  padding: .5em;
+  width: 70%;
+}
+
+select {
+  padding: .5em;
+  border-radius: 5em;
+  background-color: transparent;
+  border: solid 2px lightgray;
+  width: 25%;
+  margin-left: auto;
+}
+
+div.searchContainer {
+  width: 100%;
+  display: inline-flex;
+  flex-direction: row;
+}
