@@ -85,7 +85,7 @@ function Dashboard() {
   }, [location.search]);
 
   // Uncomment for production
-  if (!profile && !tracks) {
+  if (!profile || !tracks) {
     return <p>Loading...</p>;
   }
 
@@ -100,11 +100,10 @@ function Dashboard() {
         </div>
         <div className="card" id='tracks'>
           <h1 className="header">Top Tracks</h1>
-          <Song topTracks={tracks.items[0]}/>
-          <Song topTracks={tracks.items[1]}/> 
-          <Song topTracks={tracks.items[2]}/> 
-          <Song topTracks={tracks.items[3]}/>
-          <Song topTracks={tracks.items[4]}/> 
+          {tracks?.items?.slice(0, 5).map((track, index) => (
+            <Song topTracks={track}/>
+          ))
+          }          
         </div>
         <div className="card" id='artists'>
           <h1 className="header">Top Artists</h1>
