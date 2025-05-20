@@ -39,7 +39,7 @@ function Dashboard() {
         setProfile(fetchedProfile);
         const topTracks = await getTop(token, 'tracks');
         setTopTracks(topTracks);
-        const topArtist = await getTop(token, 'artist');
+        const topArtist = await getTop(token, 'artists');
         setTopArtist(topArtist)
   
         return;
@@ -55,7 +55,7 @@ function Dashboard() {
           const topTracks = await getTop(newTokenData, 'tracks');
           setTopTracks(topTracks);
 
-          const topArtist = await getTop(newTokenData, 'artist');
+          const topArtist = await getTop(newTokenData, 'artists');
           setTopArtist(topArtist)
   
           return;
@@ -83,7 +83,7 @@ function Dashboard() {
           setProfile(profile);
           const topTracks = await getTop(tokenData.access_token, 'tracks');
           setTopTracks(topTracks);
-          const topArtist = await getTop(tokenData.access_token, 'artist');
+          const topArtist = await getTop(tokenData.access_token, 'artists');
           setTopArtist(topArtist)
         }
       }
