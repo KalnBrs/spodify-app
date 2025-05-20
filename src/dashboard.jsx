@@ -116,7 +116,7 @@ function Dashboard() {
         <div className="card" id='artists'>
           <h1 className="header">Top Artists</h1>
           {artists?.items?.slice(0, 5).map((artist) => (
-            <Artist artist={artists} />
+            <Artist artist={artist} />
           ))}
         </div>
         <div className="card" id='playlists'>
