@@ -80,13 +80,12 @@ function Dashboard() {
         }
       }
     }
-    console.log(tracks)
   
     init();
   }, [location.search]);
 
   // Uncomment for production
-  if (!profile) {
+  if (!profile && !tracks) {
     return <p>Loading...</p>;
   }
 
