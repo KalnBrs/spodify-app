@@ -58,10 +58,10 @@ function Dashboard() {
           setProfile(fetchedProfile);
         }
       }
-
+      
+      console.log(getTop(localStorage.getItem('access_token'), 'tracks'))
     }
 
-    console.log(getTop(localStorage.getItem('access_token'), 'tracks'))
     init();
   }, [location.search]);
 
