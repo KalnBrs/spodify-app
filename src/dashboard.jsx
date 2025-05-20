@@ -64,20 +64,24 @@ function Dashboard() {
   
       const urlParams = new URLSearchParams(window.location.search);
       const code = urlParams.get('code');
-      if (code && !localStorage.getItem('access_token')) {
-        localStorage.setItem('code', code);
-  
-        const tokenData = await getAccessToken(clientId, code);
+      if (code) {
+        // Remove any old tokens first
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("refresh_token");
+        localStorage.removeItem("token_expiry");
+
+        const tokenData = await getAccessToken(clientId, code, redirectUri);
         if (tokenData?.access_token) {
-          localStorage.setItem('access_token', tokenData.access_token);
-          localStorage.setItem('refresh_token', tokenData.refresh_token);
-          localStorage.setItem('token_expiry', Date.now() + tokenData.expires_in * 1000);
-  
-          const fetchedProfile = await fetchProfile(tokenData.access_token);
-          setProfile(fetchedProfile);
-  
-          const topTracks = await getTop(tokenData.access_token, 'tracks');
-          console.log(topTracks);
+          localStorage.setItem("access_token", tokenData.access_token);
+          localStorage.setItem("refresh_token", tokenData.refresh_token);
+          localStorage.setItem("token_expiry", Date.now() + tokenData.expires_in * 1000);
+
+          // Clean the URL
+          // window.history.replaceState({}, document.title, window.location.pathname);
+
+          const profile = await fetchProfile(tokenData.access_token);
+          setProfile(profile);
+          console.log(await getTop(tokenData.access_token, "tracks"));
         }
       }
     }

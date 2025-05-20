@@ -2,10 +2,6 @@ import CryptoJS from 'crypto-js';
 
 export async function redirectToAuthCodeFlow(clientId) {
   console.log('hello')
-  localStorage.removeItem('access_token');
-  localStorage.removeItem('token_expiry');
-  localStorage.removeItem('refresh_token');
-  localStorage.removeItem('code');
   const verifier = generateCodeVerifier(128);
   const challenge = await generateCodeChallenge(verifier);
 
