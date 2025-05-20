@@ -20,6 +20,7 @@ const clientId = 'c7d7db2ffd7e4d229d6c8977e5792dee';
 
 function Dashboard() {
   const [profile, setProfile] = useState(null);
+  const [topTracks, setTopTracks] = useState(null)
   const location = useLocation();
 
   useEffect(() => {
@@ -40,7 +41,7 @@ function Dashboard() {
         setProfile(fetchedProfile);
   
         const topTracks = await getTop(token, 'tracks');
-        console.log(topTracks);
+        setTopTracks(topTracks);
   
         return;
       }
@@ -53,7 +54,7 @@ function Dashboard() {
           setProfile(fetchedProfile);
   
           const topTracks = await getTop(newTokenData, 'tracks');
-          console.log(topTracks);
+          setTopTracks(topTracks);
   
           return;
         }
@@ -78,7 +79,8 @@ function Dashboard() {
 
           const profile = await fetchProfile(tokenData.access_token);
           setProfile(profile);
-          console.log(await getTop(tokenData.access_token, "tracks"));
+          const topTracks = await getTop(newTokenData, 'tracks');
+          setTopTracks(topTracks);
         }
       }
     }
@@ -97,16 +99,15 @@ function Dashboard() {
       <Play />
       <div className="container1">
         <div className="card">
-          {/* profile={profile} */}
-          <ProfileCard  />
+          <ProfileCard profile={profile}/>
         </div>
         <div className="card" id='tracks'>
           <h1 className="header">Top Tracks</h1>
-          <Song />
-          <Song /> 
-          <Song /> 
-          <Song />
-          <Song /> 
+          <Song topTracks={topTracks.items[0]}/>
+          <Song topTracks={topTracks.items[1]}/> 
+          <Song topTracks={topTracks.items[2]}/> 
+          <Song topTracks={topTracks.items[3]}/>
+          <Song topTracks={topTracks.items[4]}/> 
         </div>
         <div className="card" id='artists'>
           <h1 className="header">Top Artists</h1>
