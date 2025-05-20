@@ -33,7 +33,33 @@ function Dashboard() {
       const token = localStorage.getItem('access_token');
       const expiry = localStorage.getItem('token_expiry');
       const refreshToken = localStorage.getItem('refresh_token');
-  
+      
+      const urlParams = new URLSearchParams(window.location.search);
+      const code = urlParams.get('code');
+      if (code) {
+        // Remove any old tokens first
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("refresh_token");
+        localStorage.removeItem("token_expiry");
+
+        const tokenData = await getAccessToken(clientId, code);
+        if (tokenData?.access_token) {
+          localStorage.setItem("access_token", tokenData.access_token);
+          localStorage.setItem("refresh_token", tokenData.refresh_token);
+          localStorage.setItem("token_expiry", Date.now() + tokenData.expires_in * 1000);
+
+          // Clean the URL
+          window.history.replaceState({}, document.title, window.location.pathname);
+
+          const profile = await fetchProfile(tokenData.access_token);
+          setProfile(profile);
+          const topTracks = await getTop(tokenData.access_token, 'tracks');
+          setTopTracks(topTracks);
+          const topArtist = await getTop(tokenData.access_token, 'artists');
+          setTopArtist(topArtist)
+        }
+      }
+
       if (token && expiry && Date.now() < parseInt(expiry)) {
         const fetchedProfile = await fetchProfile(token);
         setProfile(fetchedProfile);
@@ -59,32 +85,6 @@ function Dashboard() {
           setTopArtist(topArtist)
   
           return;
-        }
-      }
-  
-      const urlParams = new URLSearchParams(window.location.search);
-      const code = urlParams.get('code');
-      if (code) {
-        // Remove any old tokens first
-        localStorage.removeItem("access_token");
-        localStorage.removeItem("refresh_token");
-        localStorage.removeItem("token_expiry");
-
-        const tokenData = await getAccessToken(clientId, code);
-        if (tokenData?.access_token) {
-          localStorage.setItem("access_token", tokenData.access_token);
-          localStorage.setItem("refresh_token", tokenData.refresh_token);
-          localStorage.setItem("token_expiry", Date.now() + tokenData.expires_in * 1000);
-
-          // Clean the URL
-          window.history.replaceState({}, document.title, window.location.pathname);
-
-          const profile = await fetchProfile(tokenData.access_token);
-          setProfile(profile);
-          const topTracks = await getTop(tokenData.access_token, 'tracks');
-          setTopTracks(topTracks);
-          const topArtist = await getTop(tokenData.access_token, 'artists');
-          setTopArtist(topArtist)
         }
       }
     }
