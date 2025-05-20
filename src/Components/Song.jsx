@@ -5,7 +5,7 @@ function Song(props) {
   return (
     <div className='container'>
       <div onClick='' >
-        <img src={track['album']['images'][0].url} alt="" className='cover'/>
+        <img src={props.topTracks['album']['images'][0].url} alt="" className='cover'/>
         <div className='names'>
           <p className='song'>Song</p>
           <p className="artist">Artist</p>
