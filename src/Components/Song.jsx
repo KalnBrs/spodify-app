@@ -1,25 +1,28 @@
-import './Song.css'
+import './Song.css';
 
-function Song(props) {
-  console.log(props.topTracks)
-  const track = props.topTracks;
-  console.log(track)
+function Song({ topTracks }) {
+  if (!topTracks) return null;
+
+  const trackName = topTracks.name;
+  const artistName = topTracks.artists?.[0]?.name;
+  const albumImage = topTracks.album?.images?.[0]?.url;
+
   return (
     <div className='container'>
-      <div onClick='' >
-        <img src={props.topTracks.album.images[0].url} alt="" className='cover'/>
+      <div>
+        <img src={albumImage} alt={`${trackName} album cover`} className='cover' />
         <div className='names'>
-          <p className='song'>Song</p>
-          <p className="artist">Artist</p>
+          <p className='song'>{trackName}</p>
+          <p className='artist'>{artistName}</p>
         </div>
       </div>
       <div className='buttonContainer'>
         <button className='queue'>
-          <img src="/queue.svg" alt="" className='queue'/>
+          <img src="/queue.svg" alt="Add to Queue" className='queue-icon' />
         </button>
       </div>
     </div>
-  )
+  );
 }
 
 export default Song;
