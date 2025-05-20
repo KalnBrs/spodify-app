@@ -20,7 +20,7 @@ const clientId = 'c7d7db2ffd7e4d229d6c8977e5792dee';
 
 function Dashboard() {
   const [profile, setProfile] = useState(null);
-  const [tracks, setTopTracks] = useState(null)
+  const [tracks, setTopTracks] = useState(1)
   const location = useLocation();
 
   useEffect(() => {
@@ -94,7 +94,7 @@ function Dashboard() {
   }
 
   console.log(profile)
-  console.log(tracks.items[0])
+  console.log(tracks)
   return (
     <div className="dashboard">
       <Play />
