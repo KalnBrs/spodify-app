@@ -2,7 +2,7 @@ import { getTotalTime } from '../API_Scripts/getTotalTime';
 
 import './Playlist.css';
 
-function Playlist(props) {
+async function Playlist(props) {
   const playlist = props.playlist;
   const token = props.token;
   if (!playlist) return null;
@@ -11,7 +11,7 @@ function Playlist(props) {
   const playlistImage = playlist.images?.[0]?.url;
   const playlistColab = playlist.collaborative;
   const playlistNumTracks = playlist.tracks?.total;
-  const playlistTime = getTotalTime(token, playlist.href)
+  const playlistTime = await getTotalTime(token, playlist.href)
   const colabSrc = playlistColab ? '/colab.svg' : '/person.svg'
 
   return (
