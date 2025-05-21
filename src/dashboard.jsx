@@ -31,9 +31,6 @@ function Dashboard() {
   const location = useLocation();
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const code = params.get("code");
-
     async function init() {
       const token = localStorage.getItem('access_token');
       const expiry = localStorage.getItem('token_expiry');
