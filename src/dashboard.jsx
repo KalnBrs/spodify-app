@@ -5,6 +5,7 @@ import { fetchProfile } from "./API_Scripts/getProfile";
 import { refreshAccessToken } from "./API_Scripts/refreshAccess";
 import { getTop } from "./API_Scripts/getTop";
 import { getCurrentUsersPlaylists } from "./API_Scripts/getPlaylist";
+import { getRecentPlays } from "./API_Scripts/getRecentPlays";
 
 import './dashboard.css'
 
@@ -24,6 +25,7 @@ function Dashboard() {
   const [tracks, setTopTracks] = useState(null);
   const [artists, setTopArtist] = useState(null);
   const [currPlaylist, setCurrPlaylist] = useState(null);
+  const [recentPlays, setRecentPlays] = useState(null);
 
 
   const location = useLocation();
@@ -62,6 +64,8 @@ function Dashboard() {
           setTopArtist(topArtist)
           const currPlaylist = await getCurrentUsersPlaylists(tokenData.access_token)
           setCurrPlaylist(currPlaylist);
+          const recent = await getRecentPlays(tokenData.access_token)
+          setRecentPlays(recent)
         }
       }
 
@@ -74,6 +78,8 @@ function Dashboard() {
         setTopArtist(topArtist)
         const currPlaylist = await getCurrentUsersPlaylists(token)
         setCurrPlaylist(currPlaylist);
+        const recent = await getRecentPlays(token)
+        setRecentPlays(recent)
   
         return;
       }
@@ -90,6 +96,8 @@ function Dashboard() {
           setTopArtist(topArtist)
           const currPlaylist = await getCurrentUsersPlaylists(newTokenData)
           setCurrPlaylist(currPlaylist);
+          const recent = await getRecentPlays(newTokenData)
+          setRecentPlays(recent)
 
           return;
         }
@@ -155,14 +163,9 @@ function Dashboard() {
         </div>
         <div className="card">
           <h1 className="header">Recent Plays</h1>
-          <Song />
-          <Song />
-          <Song />
-          <Song />
-          <Song />
-          <Song />
-          <Song />
-          <Song />
+          {recentPlays?.items?.map((track) => (
+            <Song track={track} />
+          ))}
         </div>
       </div>
     </div>
