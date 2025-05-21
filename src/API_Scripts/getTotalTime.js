@@ -7,8 +7,6 @@ export async function getTotalTime(token, apiLink) {
   const data = await result.json();
 
   let sum = 0;
-  console.log("Full data:", data);
-
   const items = data.tracks?.items;
 
   if (!Array.isArray(items)) {
@@ -18,13 +16,7 @@ export async function getTotalTime(token, apiLink) {
 
   items.forEach(item => {
     const duration = item?.track?.duration_ms ?? 0;
-
-    if (typeof duration !== "number") {
-      console.warn("Invalid duration:", duration, "in item:", item);
-    }
-
     sum += duration;
-    console.log("Current sum:", sum);
   });
 
   console.log(`Finished sum: ${sum}`);
@@ -38,5 +30,6 @@ export async function getTotalTime(token, apiLink) {
   const formattedMinutes = String(minutes).padStart(2, '0');
   const formattedSeconds = String(seconds).padStart(2, '0');
 
+  console.log(`${formattedHours}:${formattedMinutes}:${formattedSeconds}`)
   return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
 }
