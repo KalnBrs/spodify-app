@@ -18,9 +18,7 @@ export async function getTotalTime(token, apiLink) {
     const duration = item?.track?.duration_ms ?? 0;
     sum += duration;
   });
-
-  console.log(`Finished sum: ${sum}`);
-
+  
   const totalSeconds = Math.floor(sum / 1000);
   const hours = Math.floor(totalSeconds / 3600);
   const minutes = Math.floor((totalSeconds % 3600) / 60);
@@ -30,6 +28,5 @@ export async function getTotalTime(token, apiLink) {
   const formattedMinutes = String(minutes).padStart(2, '0');
   const formattedSeconds = String(seconds).padStart(2, '0');
 
-  console.log(`${formattedHours}:${formattedMinutes}:${formattedSeconds}`)
   return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
 }
