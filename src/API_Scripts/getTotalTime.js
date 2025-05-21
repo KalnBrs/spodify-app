@@ -1,17 +1,33 @@
 export async function getTotalTime(token, apiLink) {
   const result = await fetch(apiLink, {
-    method: "GET", headers: { Authorization: `Bearer ${token}` }
+    method: "GET",
+    headers: { Authorization: `Bearer ${token}` }
   });
 
-  const data = await result.json()
+  const data = await result.json();
 
   let sum = 0;
-  console.log(data)
-  data.tracks?.items?.forEach(item => {
-    sum += item?.track?.duration_ms;
-    console.log(sum)
-  })
-  console.log(`finished run sum: ${sum}`)
+  console.log("Full data:", data);
+
+  const items = data.tracks?.items;
+
+  if (!Array.isArray(items)) {
+    console.warn("No track items found.");
+    return "00:00:00";
+  }
+
+  items.forEach(item => {
+    const duration = item?.track?.duration_ms ?? 0;
+
+    if (typeof duration !== "number") {
+      console.warn("Invalid duration:", duration, "in item:", item);
+    }
+
+    sum += duration;
+    console.log("Current sum:", sum);
+  });
+
+  console.log(`Finished sum: ${sum}`);
 
   const totalSeconds = Math.floor(sum / 1000);
   const hours = Math.floor(totalSeconds / 3600);
