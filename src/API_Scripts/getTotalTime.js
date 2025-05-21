@@ -3,9 +3,11 @@ export async function getTotalTime(token, apiLink) {
     method: "GET", headers: { Authorization: `Bearer ${token}` }
   });
 
+  const data = await result.json()
+
   let sum = 0;
-  console.log(result)
-  result.json().items?.forEach(item => {
+  console.log(data)
+  data.items?.forEach(item => {
     sum += item?.track?.duration_ms;
     console.log(sum)
   })
