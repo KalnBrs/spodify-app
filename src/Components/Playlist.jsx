@@ -1,12 +1,14 @@
 import { useEffect } from 'react';
 import { getTotalTime } from '../API_Scripts/getTotalTime';
+import { useState } from 'react';
 
 import './Playlist.css';
 
 function Playlist(props) {
-  let playlistTime = '';
+  const [playlistTime, setPlaylistTime] = useState(null); 
+
   useEffect(() => {
-    playlistTime = getTotalTime(token, playlist.href)
+    setPlaylistTime(getTotalTime(token, playlist.href));
   }, [location.search])
 
   const playlist = props.playlist;
@@ -18,6 +20,7 @@ function Playlist(props) {
   const playlistColab = playlist.collaborative;
   const playlistNumTracks = playlist.tracks?.total;
   const colabSrc = playlistColab ? '/colab.svg' : '/person.svg'
+
 
   return (
     <div className='container'>
