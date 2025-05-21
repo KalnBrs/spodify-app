@@ -104,10 +104,6 @@ function Dashboard() {
     return <p>Loading...</p>;
   }
 
-  console.log(profile)
-  console.log(tracks)
-  console.log(artists)
-  console.log(currPlaylist)
   return (
     <div className="dashboard">
       <Play />
