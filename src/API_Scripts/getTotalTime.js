@@ -4,10 +4,11 @@ export async function getTotalTime(token, apiLink) {
   });
 
   let sum = 0;
-  await result?.json().items?.forEach(item => {
+  result?.json().items?.forEach(item => {
     sum += item?.track?.duration_ms;
     console.log(sum)
   })
+  console.log(`finished run sum: ${sum}`)
 
   const totalSeconds = Math.floor(sum / 1000);
   const hours = Math.floor(totalSeconds / 3600);
