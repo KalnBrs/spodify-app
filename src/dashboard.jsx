@@ -161,7 +161,7 @@ function Dashboard() {
         <div className="card">
           <h1 className="header">Recent Plays</h1>
           {recentPlays?.items?.map((track) => (
-            <Song track={track} />
+            <Song track={track.track} />
           ))}
         </div>
       </div>
