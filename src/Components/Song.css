@@ -54,7 +54,7 @@ p.song {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 15vw; 
+  max-width: 10vw; 
 }
 
 p.artist{
