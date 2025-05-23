@@ -17,6 +17,7 @@ import Recomend from './Components/Recomend';
 import Mood from "./Components/Mood";
 import Play from "./Components/Play";
 import Search from "./Components/Search";
+import { getMood } from "./API_Scripts/getMood";
 
 const clientId = 'c7d7db2ffd7e4d229d6c8977e5792dee';
 
@@ -26,6 +27,7 @@ function Dashboard() {
   const [artists, setTopArtist] = useState(null);
   const [currPlaylist, setCurrPlaylist] = useState(null);
   const [recentPlays, setRecentPlays] = useState(null);
+  const [mood, setMood] = useState(null);
 
 
   const location = useLocation();
@@ -109,6 +111,9 @@ function Dashboard() {
     return <p>Loading...</p>;
   }
 
+  setMood(getMood(tracks))
+  console.log(mood);
+  
   return (
     <div className="dashboard">
       <Play />

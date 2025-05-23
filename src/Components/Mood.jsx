@@ -9,7 +9,7 @@ import {
 } from 'recharts';
 
 const data = [
-  { name: 'Progress', value: 70 },
+  { name: 'Progress', value: 50 },
 ];
 
 const colors = {
@@ -29,7 +29,7 @@ function Mood(props) {
       <p className='mood'>{props.mood}:</p>
       <ResponsiveContainer width="100%" height="5%">
         <BarChart layout="vertical" data={data} >
-          <XAxis type="number" domain={[0, 100]}  hide/>
+          <XAxis type="number" domain={[0, 50]}  hide/>
           <YAxis type="category" dataKey="name" hide />
           <Tooltip />
           <Bar dataKey="value" fill={colors[props.mood]} barSize={40} radius={[10, 10, 10, 10]} />
