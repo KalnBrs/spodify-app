@@ -65,6 +65,8 @@ function Dashboard() {
           setCurrPlaylist(currPlaylist);
           const recent = await getRecentPlays(tokenData.access_token)
           setRecentPlays(recent)
+          const mood = await getMood(tokenData.access_token, tracks?.items)
+          setMood(mood);
         }
       }
 
@@ -79,6 +81,8 @@ function Dashboard() {
         setCurrPlaylist(currPlaylist);
         const recent = await getRecentPlays(token)
         setRecentPlays(recent)
+        const mood = await getMood(token, tracks?.items)
+          setMood(mood);
   
         return;
       }
@@ -97,6 +101,8 @@ function Dashboard() {
           setCurrPlaylist(currPlaylist);
           const recent = await getRecentPlays(newTokenData)
           setRecentPlays(recent)
+          const mood = await getMood(newTokenData, tracks?.items)
+          setMood(mood);
 
           return;
         }
@@ -111,8 +117,7 @@ function Dashboard() {
     return <p>Loading...</p>;
   }
 
-  setMood(getMood(localStorage.getItem('access_token'), tracks?.items))
-  console.log(mood);
+  
 
   return (
     <div className="dashboard">
