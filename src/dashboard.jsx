@@ -111,9 +111,9 @@ function Dashboard() {
     return <p>Loading...</p>;
   }
 
-  setMood(getMood(tracks))
+  setMood(getMood(tracks?.items))
   console.log(mood);
-  
+
   return (
     <div className="dashboard">
       <Play />
