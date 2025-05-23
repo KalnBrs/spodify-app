@@ -7,7 +7,7 @@ export async function getMood(tracks) {
     danceable: 0,
     aggresive: 0,
     romantic: 0,
-    ambient: 0 
+    ambient: 0
   }
 
   tracks.forEach(async (track) => {
@@ -15,7 +15,10 @@ export async function getMood(tracks) {
       method: "GET", headers: { Authorization: `Bearer ${token}` }
     });
 
+    console.log(result)
+
     const energy = result.energy;
+    console.log(energy)
     const tempo = result.tempo;
     const valence = result.valence;
     const danceability = result.danceability;
