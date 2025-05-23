@@ -111,7 +111,7 @@ function Dashboard() {
     return <p>Loading...</p>;
   }
 
-  setMood(getMood(tracks?.items))
+  setMood(getMood(localStorage.getItem('access_token'), tracks?.items))
   console.log(mood);
 
   return (

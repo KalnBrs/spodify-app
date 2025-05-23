@@ -1,4 +1,4 @@
-export async function getMood(tracks) {
+export async function getMood(token, tracks) {
   let mood = {
     energetic: 0,
     happy: 0,
