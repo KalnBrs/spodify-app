@@ -10,6 +10,8 @@ export async function getMood(tracks) {
     ambient: 0
   }
 
+  console.log(tracks)
+
   tracks.forEach(async (track) => {
     const result = await fetch(`https://api.spotify.com/v1/audio-features/${track.uri}`, {
       method: "GET", headers: { Authorization: `Bearer ${token}` }
