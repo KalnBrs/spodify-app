@@ -10,17 +10,17 @@ export async function getMood(token, tracks) {
     ambient: 0
   }
 
-  console.log(tracks)
+  console.log(`all tracks: ${tracks}`)
 
   tracks.forEach(async (track) => {
     const result = await fetch(`https://api.spotify.com/v1/audio-features/${track.uri}`, {
       method: "GET", headers: { Authorization: `Bearer ${token}` }
     });
 
-    console.log(result)
+    console.log(`result from fetch : ${result}`)
 
     const energy = result.energy;
-    console.log(energy)
+    console.log(`energy: ${energy}`)
     const tempo = result.tempo;
     const valence = result.valence;
     const danceability = result.danceability;
