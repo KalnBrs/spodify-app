@@ -118,7 +118,7 @@ function Dashboard() {
   }
 
   
-
+  console.log(mood)
   return (
     <div className="dashboard">
       <Play />
