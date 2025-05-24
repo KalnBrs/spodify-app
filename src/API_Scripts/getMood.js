@@ -47,5 +47,6 @@ export async function getMood(tracks) {
     }
   }
 
+  console.log(mood)
   return mood;
 }
