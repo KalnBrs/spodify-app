@@ -65,7 +65,7 @@ function Dashboard() {
           setCurrPlaylist(currPlaylist);
           const recent = await getRecentPlays(tokenData.access_token)
           setRecentPlays(recent)
-          const mood = await getMood(tokenData.access_token, topTracks.items)
+          const mood = await getMood(topTracks.items)
           setMood(mood);
         }
       }
@@ -81,7 +81,7 @@ function Dashboard() {
         setCurrPlaylist(currPlaylist);
         const recent = await getRecentPlays(token)
         setRecentPlays(recent)
-        const mood = await getMood(token, topTracks.items)
+        const mood = await getMood(topTracks.items)
           setMood(mood);
   
         return;
@@ -101,7 +101,7 @@ function Dashboard() {
           setCurrPlaylist(currPlaylist);
           const recent = await getRecentPlays(newTokenData)
           setRecentPlays(recent)
-          const mood = await getMood(newTokenData, topTracks.items)
+          const mood = await getMood(topTracks.items)
           setMood(mood);
 
           return;

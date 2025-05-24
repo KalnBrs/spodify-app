@@ -14,29 +14,52 @@ export async function getMood(token, tracks) {
 
   for (const track of tracks) {
     const artistName = encodeURIComponent(track.artists?.[0]?.name || "");
-    const trackName = encodeURIComponent(track.name || "");
+    if (!artistName || !track.name) continue;
 
-    if (!artistName || !trackName) continue;
+    // Generate variants of track name for fallback matching
+    const rawTitle = track.name;
+    const variants = [
+      rawTitle,
+      rawTitle.replace(/[.#]/g, ""),
+      rawTitle.replace(/\bNo\.?\s*/gi, "Number "),
+      rawTitle.replace(/[’']/g, ""),
+      rawTitle.replace(/[^a-zA-Z0-9\s]/g, "")
+    ];
 
-    const response = await fetch(`https://www.theaudiodb.com/api/v1/json/1/searchtrack.php?s=${artistName}&t=${trackName}`);
-    const data = await response.json();
-    console.log(`Result for ${track.name}:`, data);
+    let data = null;
 
-    if (data.track && data.track[0]) {
-      const trackInfo = data.track[0];
-      const moodTag = trackInfo.strMood?.toLowerCase() || "";
+    for (const variant of variants) {
+      const trackName = encodeURIComponent(variant.trim());
+      const url = `https://www.theaudiodb.com/api/v1/json/1/searchtrack.php?s=${artistName}&t=${trackName}`;
 
-      console.log(`Track: ${track.name}, Mood: ${moodTag}`);
+      const response = await fetch(url);
+      if (!response.ok) continue;
 
-      if (moodTag.includes("happy")) mood.happy++;
-      if (moodTag.includes("chill")) mood.chill++;
-      if (moodTag.includes("sad")) mood.sad++;
-      if (moodTag.includes("energetic")) mood.energetic++;
-      if (moodTag.includes("romantic")) mood.romantic++;
-      if (moodTag.includes("aggressive")) mood.aggresive++;
-      if (moodTag.includes("ambient")) mood.ambient++;
-      if (trackInfo.intTempo && parseInt(trackInfo.intTempo) > 110) mood.danceable++;
+      const result = await response.json();
+      if (result.track && result.track[0]) {
+        data = result;
+        break; // stop at first successful result
+      }
     }
+
+    if (!data) {
+      console.warn(`No match found for: ${rawTitle} by ${track.artists?.[0]?.name}`);
+      continue;
+    }
+
+    const trackInfo = data.track[0];
+    const moodTag = trackInfo.strMood?.toLowerCase() || "";
+
+    console.log(`Track: ${rawTitle}, Mood: ${moodTag}`);
+
+    if (moodTag.includes("happy")) mood.happy++;
+    if (moodTag.includes("chill")) mood.chill++;
+    if (moodTag.includes("sad")) mood.sad++;
+    if (moodTag.includes("energetic")) mood.energetic++;
+    if (moodTag.includes("romantic")) mood.romantic++;
+    if (moodTag.includes("aggressive")) mood.aggresive++;
+    if (moodTag.includes("ambient")) mood.ambient++;
+    if (trackInfo.intTempo && parseInt(trackInfo.intTempo) > 110) mood.danceable++;
   }
 
   return mood;
