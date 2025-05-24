@@ -159,14 +159,14 @@ function Dashboard() {
       <div className="container2">
         <div className="card">
           <h1 className="header">Mood Breakdown</h1>
-          <Mood mood='Energetic' />
-          <Mood mood='Happy'/>
-          <Mood mood='Chill'/>
-          <Mood mood='Sad'/>
-          <Mood mood='Dance-able'/>
-          <Mood mood='Aggressive'/>
-          <Mood mood='Romantic'/>
-          <Mood mood='Ambient'/>
+          <Mood mood='Energetic' value={mood.energetic} />
+          <Mood mood='Happy' value={mood.happy}/>
+          <Mood mood='Chill' value={mood.chill}/>
+          <Mood mood='Sad' value={mood.sad}/>
+          <Mood mood='Dance-able' value={mood.danceable}/>
+          <Mood mood='Aggressive' value={mood.aggresive}/>
+          <Mood mood='Romantic' value={mood.romantic}/>
+          <Mood mood='Ambient' value={mood.ambient}/>
         </div>
         <div className="card">
           <h1 className="header">Recent Plays</h1>

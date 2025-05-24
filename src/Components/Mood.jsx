@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import './Mood.css'
 import {
   ResponsiveContainer,
@@ -7,10 +8,6 @@ import {
   YAxis,
   Tooltip,
 } from 'recharts';
-
-const data = [
-  { name: 'Progress', value: 50 },
-];
 
 const colors = {
   'Energetic': '#08A66B',
@@ -24,6 +21,14 @@ const colors = {
 }
 
 function Mood(props) {
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    setData({
+      name: props.mood,
+      value: props.value
+    })
+  }, [location.search])
+
   return (
     <>
       <p className='mood'>{props.mood}:</p>
