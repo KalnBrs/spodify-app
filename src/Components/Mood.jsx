@@ -22,12 +22,10 @@ const colors = {
 
 function Mood(props) {
   const [data, setData] = useState(null);
-  useEffect(() => {
-    setData({
-      name: props.mood,
-      value: props.value
-    })
-  }, [location.search])
+  setData({
+    name: props.mood,
+    value: props.value
+  })
 
   return (
     <>
