@@ -1,5 +1,5 @@
 export async function getMood(tracks) {
-  const apiKey = process.env.REACT_APP_LAST_FM_API_KEY;
+  const apiKey = process.env.REACT_APP_LAST_FM_API;
   console.log(apiKey)
 
   let mood = {
