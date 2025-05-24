@@ -12,32 +12,29 @@ export async function getMood(token, tracks) {
 
   console.log(`all tracks: ${tracks}`)
 
-  tracks.forEach(async (track) => {
-    const result = await fetch(`https://api.spotify.com/v1/audio-features/${track.uri}`, {
-      method: "GET", headers: { Authorization: `Bearer ${token}` }
-    });
+  for (const track of tracks) {
+    const result = await fetch(`https://www.theaudiodb.com/api/v1/json/1/searchtrack.php?s=${track.artists?.name}&t=${track.name}`);
+    const data = await result.json();
+    console.log(`result from fetch :`)
+    console.log(result)
 
-    console.log(`result from fetch : ${result}`)
+    if (data.track && data.track[0]) {
+      const trackInfo = data.track[0];
+      const moodTag = trackInfo.strMood?.toLowerCase() || "";
 
-    const energy = result.energy;
-    console.log(`energy: ${energy}`)
-    const tempo = result.tempo;
-    const valence = result.valence;
-    const danceability = result.danceability;
-    const acoustic = result.acousticness;
-    const instrumentalness = result.instrumentalness;
-    const liveness = result.liveness;
-    const speechiness = result.speechiness;
+      console.log(`Track: ${track.name}, Mood: ${moodTag}`);
 
-    if (energy > 0.7 && tempo > 120 && valence > 0.7) mood.energetic += 1;
-    if (valence > 0.7 && energy > 0.5 && danceability > 0.6) mood.happy += 1;
-    if (energy < 0.4 && valence >= 0.4 && valence <= 0.6 && tempo < 100 && acoustic > 0.5) mood.chill += 1;
-    if (valence < 0.3 && energy < 0.5 && acoustic >= 0.4) mood.sad += 1;
-    if (danceability > 0.7 && energy > 0.6 && tempo >= 110 && tempo <= 130) mood.danceable += 1;
-    if (valence < 0.3 && energy > 0.7) mood.aggresive += 1;
-    if (valence >= 0.5 && valence <= 0.8 && energy >= 0.3 && energy <= 0.6 && danceability >= 0.4 && danceability <= 0.7 && tempo >= 70 && tempo <= 110 && acoustic >= 0.3 && acoustic <= 0.8 && instrumentalness < 0.3) mood.romantic += 1;
-    if (energy < 0.4 && valence >= 0.3 && valence <= 0.6 && tempo < 100 && instrumentalness > 0.7 && acoustic > 0.5 && liveness < 0.3 && speechiness < 0.2) mood.ambient;
-  });
+      // You can categorize moods into your buckets
+      if (moodTag.includes("happy")) mood.happy++;
+      if (moodTag.includes("chill")) mood.chill++;
+      if (moodTag.includes("sad")) mood.sad++;
+      if (moodTag.includes("energetic")) mood.energetic++;
+      if (moodTag.includes("romantic")) mood.romantic++;
+      if (moodTag.includes("aggressive")) mood.aggresive++;
+      if (moodTag.includes("ambient")) mood.ambient++;
+      if (trackInfo.intTempo && parseInt(trackInfo.intTempo) > 110) mood.danceable++;
+    }
+  }
 
   return mood;
 }
