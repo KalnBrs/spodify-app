@@ -1,5 +1,6 @@
 export async function getMood(tracks) {
   const apiKey = process.env.LAST_FM_API_KEY;
+  console.log(apiKey)
 
   let mood = {
     energetic: 0,
