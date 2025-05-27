@@ -11,7 +11,6 @@ function Search(props) {
   const [selectedOption, setSelectedOption] = useState('');
   const [searchValue, setSearchValue] = useState('');
   const [result, setResult] = useState(null)
-  let content;
 
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
@@ -21,18 +20,22 @@ function Search(props) {
     console.log('ran')
     setSearchValue(event.target.value)
 
+    console.log(selectedOption)
     if (selectedOption === 'Song') {
+      console.log('song')
       const searchVal = await search(props.token, searchValue, 'track');
       setResult(searchVal?.tracks?.items?.slice(0, 5).map((track) => {
         <Song track={track} />
       }))
     } else if (selectedOption === 'Artist') {
+      console.log('artist')
       const searchVal = await search(props.token, searchValue, 'artist');
 
       setResult(searchVal?.artists?.items?.slice(0, 5).map((artist) => {
         <Artist artist={artist} />
       }))
     } else if (selectedOption === 'Album') {
+      console.log('album')
       const searchVal = await search(props.token, searchValue, 'album');
 
       setResult(searchVal?.albums?.items?.slice(0, 5).map((album) => {
