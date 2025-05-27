@@ -104,7 +104,7 @@ function Dashboard() {
           recomend.slice(0, 5).map(async (track) => {
             const trackName = track.similartracks?.track?.[0]?.name;
             if (!trackName) return null;
-            const result = await search(tokenData.access_token, trackName, 'track');
+            const result = await search(token, trackName, 'track');
             return result?.tracks?.items?.[0] || null;
           })
         );
@@ -136,7 +136,7 @@ function Dashboard() {
             recomend.slice(0, 5).map(async (track) => {
               const trackName = track.similartracks?.track?.[0]?.name;
               if (!trackName) return null;
-              const result = await search(tokenData.access_token, trackName, 'track');
+              const result = await search(newTokenData, trackName, 'track');
               return result?.tracks?.items?.[0] || null;
             })
           );
