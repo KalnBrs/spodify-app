@@ -1,0 +1,45 @@
+img {
+  display: block;
+  border-radius: 50%;
+  width: 75%;
+  margin: auto;
+}
+
+h1 {
+  text-align: center;
+  font-size: clamp(1em, 2vw, 2em);
+  width: 90%;
+  margin: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.followers {
+  color: #778082;
+  text-align: center;
+  margin-top: 0.25em;
+}
+
+p.premium  {
+  background-color: #05AF6F;
+  text-align: center;
+  width: 50%;
+  margin: auto;
+  font-size: clamp(.5em, 1vw, 1em);
+  font-weight: Bold;
+  padding: 0.5em;
+  border-radius: 1.5em;
+  color:#0A0C0E;
+}
+
+p.free {
+  background-color: grey;
+  text-align: center;
+  width: 50%;
+  margin: auto;
+  font-size: clamp(.5em, 1vw, 1em);
+  font-weight: Bold;
+  padding: 0.5em;
+  border-radius: 1.5em;
+  color:#0A0C0E;
+}
