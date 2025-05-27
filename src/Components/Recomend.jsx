@@ -3,7 +3,7 @@ import './Recomend.css'
 import Song from './Song'
 
 function Recomend({ track }) {
-  console.log(`recomend track: ${track}`)
+  console.log(track)
   return (
     <div className='recomendContainer'>
       <Song track={track} />
