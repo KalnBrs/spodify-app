@@ -6,6 +6,7 @@ function Recomend({ track }) {
   console.log(track)
   return (
     <div className='recomendContainer'>
+      {console.log(track)}
       <Song track={track} />
       <div className='buttonContainer'>
         <button className='recomendButton'>
