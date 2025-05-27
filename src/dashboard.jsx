@@ -123,9 +123,7 @@ function Dashboard() {
   if (!profile || !tracks) {
     return <p>Loading...</p>;
   }
-
   
-  console.log(recomend)
   return (
     <div className="dashboard">
       <Play />
