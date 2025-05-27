@@ -3,9 +3,9 @@ import './Recomend.css'
 import Song from './Song'
 
 function Recomend({ track }) {
+  console.log(`recomend track: ${track}`)
   return (
     <div className='recomendContainer'>
-      {console.log(`recomend track: ${track}`)}
       <Song track={track} />
       <div className='buttonContainer'>
         <button className='recomendButton'>
