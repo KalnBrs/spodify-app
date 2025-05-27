@@ -12,14 +12,14 @@ import { search } from "./API_Scripts/search";
 
 import './dashboard.css'
 
-import ProfileCard from './Components/ProfileCard';
-import Song from './Components/Song';
-import Artist from "./Components/Artist";
-import Playlist from './Components/Playlist';
-import Recomend from './Components/Recomend';
-import Mood from "./Components/Mood";
-import Play from "./Components/Play";
-import Search from "./Components/Search";
+import ProfileCard from './Components/ProfileCard/ProfileCard';
+import Song from './Components/Song/Song';
+import Artist from "./Components/Artist/Artist";
+import Playlist from './Components/Playlist/Playlist';
+import Recomend from './Components/Recomend/Recomend';
+import Mood from "./Components/Mood/Mood";
+import Play from "./Components/Play/Play";
+import Search from "./Components/Search/Search";
 
 const clientId = 'c7d7db2ffd7e4d229d6c8977e5792dee';
 
