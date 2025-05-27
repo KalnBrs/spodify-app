@@ -41,6 +41,7 @@ body {
 
 #search {
   width: 50%;
+  height: fit-content;
 }
 
 #recomend {
