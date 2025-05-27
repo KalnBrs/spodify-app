@@ -7,7 +7,7 @@ input[type='search'] {
   width: 70%;
 }
 
-.searchbox {
+div.searchbox {
   margin-bottom: 0.5em;
 }
 
