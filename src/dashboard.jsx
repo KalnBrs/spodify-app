@@ -68,8 +68,6 @@ function Dashboard() {
           setCurrPlaylist(currPlaylist);
           const recent = await getRecentPlays(tokenData.access_token)
           setRecentPlays(recent)
-          const mood = await getMood(topTracks.items)
-          setMood(mood);
           const recomend = await getRecomend(topTracks.items)
           setRecomend(recomend)
           const resolvedTracks = await Promise.all(
@@ -82,6 +80,8 @@ function Dashboard() {
           );
           
           setRecomendSpodify(resolvedTracks.filter(Boolean));
+          const mood = await getMood(topTracks.items)
+          setMood(mood);
         }
       }
 
@@ -96,8 +96,6 @@ function Dashboard() {
         setCurrPlaylist(currPlaylist);
         const recent = await getRecentPlays(token)
         setRecentPlays(recent)
-        const mood = await getMood(topTracks.items)
-        setMood(mood);
         const recomend = await getRecomend(topTracks.items)
         setRecomend(recomend)
         const resolvedTracks = await Promise.all(
@@ -110,6 +108,8 @@ function Dashboard() {
         );
         
         setRecomendSpodify(resolvedTracks.filter(Boolean));
+        const mood = await getMood(topTracks.items)
+        setMood(mood);
   
         return;
       }
@@ -128,8 +128,6 @@ function Dashboard() {
           setCurrPlaylist(currPlaylist);
           const recent = await getRecentPlays(newTokenData)
           setRecentPlays(recent)
-          const mood = await getMood(topTracks.items)
-          setMood(mood);
           const recomend = await getRecomend(topTracks.items)
           setRecomend(recomend)
           const resolvedTracks = await Promise.all(
@@ -142,6 +140,8 @@ function Dashboard() {
           );
           
           setRecomendSpodify(resolvedTracks.filter(Boolean));
+          const mood = await getMood(topTracks.items)
+          setMood(mood);
 
           return;
         }
