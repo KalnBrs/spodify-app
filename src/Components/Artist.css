@@ -1,6 +1,7 @@
 div.artistContainer {
   display: inline-flex;
   flex-direction: row;
+  width: 100%;
 }
 
 div.artistName {
