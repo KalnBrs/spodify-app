@@ -72,7 +72,7 @@ function Dashboard() {
           setMood(mood);
           const recomend = await getRecomend(topTracks.items)
           setRecomend(recomend)
-          setRecomendSpodify(recomend.slice(0, 5).map((track) => {
+          setRecomendSpodify(recomend?.slice(0, 5).map((track) => {
             return search(tokenData.access_token, track.similartracks?.track?.[0]?.name, 'track')?.tracks?.items?.[0]
           }))
         }
@@ -93,7 +93,7 @@ function Dashboard() {
         setMood(mood);
         const recomend = await getRecomend(topTracks.items)
         setRecomend(recomend)
-        setRecomendSpodify(recomend.slice(0, 5).map((track) => {
+        setRecomendSpodify(recomend?.slice(0, 5).map((track) => {
           return search(token, track.similartracks?.track?.[0]?.name, 'track')?.tracks?.items?.[0]
         }))
   
@@ -118,7 +118,7 @@ function Dashboard() {
           setMood(mood);
           const recomend = await getRecomend(topTracks.items)
           setRecomend(recomend)
-          setRecomendSpodify(recomend.slice(0, 5).map((track) => {
+          setRecomendSpodify(recomend?.slice(0, 5)?.map((track) => {
             return search(newTokenData, track.similartracks?.track?.[0]?.name, 'track')?.tracks?.items?.[0]
           }))
 
