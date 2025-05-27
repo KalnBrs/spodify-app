@@ -155,9 +155,9 @@ function Dashboard() {
         </div>
         <div className="card" id='recomend'>
           <h1 className="header">Recomended Songs</h1>
-          {recomend?.slice(0, 5).map((track) => (
+          {recomend?.slice(0, 5).map(async (track) => (
             // track.simlartracks?.track?.[0]?.name
-            <Recomend track={search(localStorage.getItem('access_token'), track.similartracks?.track?.[0]?.name, 'track')?.tracks?.items?.[0]} />
+            <Recomend track={await search(localStorage.getItem('access_token'), track.similartracks?.track?.[0]?.name, 'track')?.tracks?.items?.[0]} />
           ))}
         </div>
       </div>
