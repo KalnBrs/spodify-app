@@ -156,6 +156,7 @@ function Dashboard() {
     return <p>Loading...</p>;
   }
 
+  console.log(`acess token: ${localStorage.getItem('access_token')}`)
   return (
     <div className="dashboard">
       {/* <Play /> */}
