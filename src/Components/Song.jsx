@@ -5,7 +5,7 @@ function Song({ track }) {
 
   const trackName = track.name;
   const artistName = track.artists?.[0]?.name;
-  const albumImage = !track.album?.images?.[0]?.url ? track.images[0]?.url : track.album?.images?.[0]?.url;
+  const albumImage = !track.album?.images?.[0]?.url ? track.image[0]?.['#text'] : track.album?.images?.[0]?.url;
 
 
   return (
