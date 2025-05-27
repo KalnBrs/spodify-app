@@ -1,6 +1,7 @@
 export async function getRecomend(tracks) {
   // pass in tracks?.items
   const apiKey = '65bc1d83884f288438e63b1ab3980e07';
+  console.log(tracks)
   let returnArr = [];
 
   if (!tracks){ console.error('No top tracks'); return; }
