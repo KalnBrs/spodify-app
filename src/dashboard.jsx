@@ -187,7 +187,6 @@ function Dashboard() {
         <div className="card" id='recomend'>
           <h1 className="header">Recomended Songs</h1>
           {recomendSpodify?.map((track) => (
-            // track.simlartracks?.track?.[0]?.name
             <Recomend track={track} />
           ))}
         </div>
