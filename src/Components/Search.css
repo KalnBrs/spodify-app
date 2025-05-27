@@ -7,6 +7,10 @@ input[type='search'] {
   width: 70%;
 }
 
+.searchbox {
+  margin-bottom: 0.5em;
+}
+
 select {
   padding: .5em;
   border-radius: 5em;

@@ -44,7 +44,7 @@ function Search(props) {
 
   return (
     <div className='searchContainer'>
-      <div>
+      <div className='searchbox'>
         <input
           type="search"
           placeholder='search...'
