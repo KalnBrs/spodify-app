@@ -33,14 +33,14 @@ function Playlist(props) {
       </div>
       <div>
         <p className='playlistTime'>{playlistTime} - {playlistNumTracks} tracks</p>
-        <div className='playlistButtons'>
+        {/* <div className='playlistButtons'>
           <button className='playlistIcons edit'>
             <img src="/edit.svg" alt="" className='playlistIcons edit'/>
           </button>
           <button className='playlistIcons trash'>
             <img src="/trash.svg" alt="" className='playlistIcons trash'/>
           </button>
-        </div>
+        </div> */}
       </div>
     </div>
   )

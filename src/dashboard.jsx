@@ -158,7 +158,7 @@ function Dashboard() {
 
   return (
     <div className="dashboard">
-      <Play />
+      {/* <Play /> */}
       <div className="container1">
         <div className="card">
           <ProfileCard profile={profile}/>
