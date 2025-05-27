@@ -3,6 +3,7 @@ import './Recomend.css'
 import Song from './Song'
 
 function Recomend(props) {
+  console.log(`recomend track: ${props.track}`)
   return (
     <div className='recomendContainer'>
       <Song track={props.track} />
