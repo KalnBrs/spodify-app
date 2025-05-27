@@ -157,7 +157,7 @@ function Dashboard() {
         <div className="card" id='recomend'>
           <h1 className="header">Recomended Songs</h1>
           {recomend?.slice(0, 5).map((track) => {
-            <Recomend track={track} />
+            <Recomend track={track?.similartracks?.track?.[0]} />
           })}
         </div>
       </div>
