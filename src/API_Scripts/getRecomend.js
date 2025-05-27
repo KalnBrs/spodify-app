@@ -7,12 +7,16 @@ export async function getRecomend(tracks) {
   if (!tracks) { console.error('No top tracks'); return; }
 
   const fetchTracks = tracks.slice(0, 5).map(async (track) => {
-    const result = await fetch(`https://ws.audioscrobbler.com/2.0/?method=track.getsimilar&artist=${encodeURIComponent(track?.artist?.name)}&track=${encodeURIComponent(track?.name)}&api_key=${apiKey}&format=json`)
+    console.log(track)
+    const artist = track.artist?.[0]?.name
+    const trackName = track.name
+
+    const result = await fetch(`https://ws.audioscrobbler.com/2.0/?method=track.getsimilar&artist=${encodeURIComponent(artist)}&track=${encodeURIComponent(trackName)}&api_key=${apiKey}&format=json`)
 
     const data = await result.json();
     return data;
   })
 
   const returnArr = await Promise.all(fetchTracks);
-  return returnArr.filter(Boolean);
+  return returnArr;
 }
