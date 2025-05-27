@@ -8,6 +8,7 @@ import { getCurrentUsersPlaylists } from "./API_Scripts/getPlaylist";
 import { getRecentPlays } from "./API_Scripts/getRecentPlays";
 import { getMood } from "./API_Scripts/getMood";
 import { getRecomend } from "./API_Scripts/getRecomend";
+import { search } from "./API_Scripts/search";
 
 import './dashboard.css'
 
@@ -155,7 +156,8 @@ function Dashboard() {
         <div className="card" id='recomend'>
           <h1 className="header">Recomended Songs</h1>
           {recomend?.slice(0, 5).map((track) => (
-            <Recomend track={track.similartracks?.track?.[0]} />
+            // track.simlartracks?.track?.[0]?.name
+            <Recomend track={search(localStorage.get('access_token', track.simlartracks?.track?.[0]?.name, 'track'))?.items?.[0]} />
           ))}
         </div>
       </div>
