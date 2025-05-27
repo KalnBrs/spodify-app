@@ -68,7 +68,7 @@ function Dashboard() {
           setRecentPlays(recent)
           const mood = await getMood(topTracks.items)
           setMood(mood);
-          const recomend = getRecomend(topTracks.items)
+          const recomend = await getRecomend(topTracks.items)
           setRecomend(recomend)
         }
       }
@@ -86,7 +86,7 @@ function Dashboard() {
         setRecentPlays(recent)
         const mood = await getMood(topTracks.items)
         setMood(mood);
-        const recomend = getRecomend(topTracks.items)
+        const recomend = await getRecomend(topTracks.items)
         setRecomend(recomend)
   
         return;
@@ -108,7 +108,7 @@ function Dashboard() {
           setRecentPlays(recent)
           const mood = await getMood(topTracks.items)
           setMood(mood);
-          const recomend = getRecomend(topTracks.items)
+          const recomend = await getRecomend(topTracks.items)
           setRecomend(recomend)
 
           return;
