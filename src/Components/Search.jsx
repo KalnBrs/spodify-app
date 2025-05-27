@@ -1,8 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { search } from '../API_Scripts/search';
 
-import './Search.css'
-
+import './Search.css';
 import Song from './Song';
 import Artist from './Artist';
 import Playlist from './Playlist';
@@ -10,46 +9,48 @@ import Playlist from './Playlist';
 function Search(props) {
   const [selectedOption, setSelectedOption] = useState('Song');
   const [searchValue, setSearchValue] = useState('');
-  const [result, setResult] = useState(null)
+  const [result, setResult] = useState(null);
 
-  console.log(props.token)
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
   }
 
-  const handleSearchChange = async (event) => {
-    console.log('ran')
-    setSearchValue(event.target.value)
+  useEffect(() => {
+    if (!searchValue) return;
 
-    console.log(selectedOption)
-    if (selectedOption === 'Song') {
-      console.log('song')
-      const searchVal = await search(props.token, searchValue, 'track');
-      setResult(searchVal?.tracks?.items?.slice(0, 5).map((track) => {
-        <Song track={track} />
-      }))
-    } else if (selectedOption === 'Artist') {
-      console.log('artist')
-      const searchVal = await search(props.token, searchValue, 'artist');
+    const delayDebounce = setTimeout(async () => {
+      console.log('Searching for:', searchValue);
 
-      setResult(searchVal?.artists?.items?.slice(0, 5).map((artist) => {
-        <Artist artist={artist} />
-      }))
-    } else if (selectedOption === 'Album') {
-      console.log('album')
-      const searchVal = await search(props.token, searchValue, 'album');
+      if (selectedOption === 'Song') {
+        const searchVal = await search(props.token, searchValue, 'track');
+        setResult(searchVal?.tracks?.items?.slice(0, 5).map((track) => (
+          <Song track={track} key={track.id} />
+        )));
+      } else if (selectedOption === 'Artist') {
+        const searchVal = await search(props.token, searchValue, 'artist');
+        setResult(searchVal?.artists?.items?.slice(0, 5).map((artist) => (
+          <Artist artist={artist} key={artist.id} />
+        )));
+      } else if (selectedOption === 'Album') {
+        const searchVal = await search(props.token, searchValue, 'album');
+        setResult(searchVal?.albums?.items?.slice(0, 5).map((album) => (
+          <Playlist playlist={album} key={album.id} />
+        )));
+      }
+    }, 500); // 500ms debounce
 
-      setResult(searchVal?.albums?.items?.slice(0, 5).map((album) => {
-        <Playlist playlist={album} />
-      }))
-    }
-  }
-
-  
+    return () => clearTimeout(delayDebounce);
+  }, [searchValue, selectedOption, props.token]);
 
   return (
     <div className='searchContainer'>
-      <input type="search" placeholder='search...' className='searchbox' value={searchValue} onChange={handleSearchChange}/>
+      <input
+        type="search"
+        placeholder='search...'
+        className='searchbox'
+        value={searchValue}
+        onChange={(e) => setSearchValue(e.target.value)}
+      />
       <select id="dropdown" value={selectedOption} onChange={handleChange}>
         <option value="Song">Song</option>
         <option value="Artist">Artist</option>
@@ -57,7 +58,7 @@ function Search(props) {
       </select>
       {result}
     </div>
-  )
+  );
 }
 
 export default Search;
