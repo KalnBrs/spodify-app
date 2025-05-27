@@ -183,7 +183,7 @@ function Dashboard() {
           ))}
         </div>
         <div className="card" id='search'>
-          <Search />
+          <Search token={localStorage.getItem('access_token')} />
         </div>
         <div className="card" id='recomend'>
           <h1 className="header">Recomended Songs</h1>
