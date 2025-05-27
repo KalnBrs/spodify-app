@@ -8,7 +8,7 @@ export async function getRecomend(tracks) {
 
   if (!tracks) { console.error('No top tracks'); return; }
 
-  const fetchTracks = tracks.slice(0, 5).map(async (track) => {
+  const fetchTracks = tracks.map(async (track) => {
     console.log(track)
 
 
@@ -21,7 +21,12 @@ export async function getRecomend(tracks) {
     const result = await fetch(`https://ws.audioscrobbler.com/2.0/?method=track.getsimilar&artist=${encodeURIComponent(artist)}&track=${encodeURIComponent(trackName)}&api_key=${apiKey}&format=json`)
 
     const data = await result.json();
-    return data;
+    if ( Array.isArray(data?.similartracks?.track) && data.similartracks.track.length > 0) {
+      return data; 
+    } else {
+      console.info(`No similar tracks for: ${artist} - ${trackName}`);
+      return null;
+    }
   })
 
   const returnArr = await Promise.all(fetchTracks);
