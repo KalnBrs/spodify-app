@@ -1,3 +1,5 @@
+const clean = str => str?.replace(/\(.*?\)|\[.*?\]|-.*$|feat\..*$/gi, '').trim();
+
 export async function getRecomend(tracks) {
   // pass in tracks?.items
   const apiKey = '65bc1d83884f288438e63b1ab3980e07';
@@ -8,8 +10,10 @@ export async function getRecomend(tracks) {
 
   const fetchTracks = tracks.slice(0, 5).map(async (track) => {
     console.log(track)
-    const artist = track.artists?.[0]?.name
-    const trackName = track.name
+
+
+    const artist = clean(track.artists?.[0]?.name)
+    const trackName = clean(track.name)
 
     console.log(`track : ${trackName}, artist: ${artist}`)
     console.log(`https://ws.audioscrobbler.com/2.0/?method=track.getsimilar&artist=${encodeURIComponent(artist)}&track=${encodeURIComponent(trackName)}&api_key=${apiKey}&format=json`)
