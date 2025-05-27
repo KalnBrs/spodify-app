@@ -1,6 +1,6 @@
 import './Recomend.css'
 
-import Song from './Song'
+import Song from '..Song/Song';
 
 function Recomend({ track }) {
   return (
