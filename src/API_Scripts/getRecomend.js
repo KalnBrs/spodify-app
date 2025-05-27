@@ -8,7 +8,7 @@ export async function getRecomend(tracks) {
 
   const fetchTracks = tracks.slice(0, 5).map(async (track) => {
     console.log(track)
-    const artist = track.artist?.[0]?.name
+    const artist = track.artists?.[0]?.name
     const trackName = track.name
 
     console.log(`track : ${trackName}, artist: ${artist}`)
