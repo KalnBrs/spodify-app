@@ -123,7 +123,7 @@ function Dashboard() {
   if (!profile || !tracks) {
     return <p>Loading...</p>;
   }
-  
+
   return (
     <div className="dashboard">
       <Play />
@@ -154,10 +154,10 @@ function Dashboard() {
         </div>
         <div className="card" id='recomend'>
           <h1 className="header">Recomended Songs</h1>
-          {recomend?.slice(0, 5).map((track) => {
+          {recomend?.slice(0, 5).map((track) => (
             console.log(track.similartracks?.track?.[0]);
             <Recomend track={track.similartracks?.track?.[0]} />
-          })}
+          ))}
         </div>
       </div>
       <div className="container2">
