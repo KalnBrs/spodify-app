@@ -5,7 +5,7 @@ import Song from './Song'
 function Recomend(props) {
   return (
     <div className='recomendContainer'>
-      <Song />
+      <Song track={props.track} />
       <div className='buttonContainer'>
         <button className='recomendButton'>
           <img src="/plus.svg" alt="" className='recomendButton'/>

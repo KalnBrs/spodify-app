@@ -6,6 +6,8 @@ import { refreshAccessToken } from "./API_Scripts/refreshAccess";
 import { getTop } from "./API_Scripts/getTop";
 import { getCurrentUsersPlaylists } from "./API_Scripts/getPlaylist";
 import { getRecentPlays } from "./API_Scripts/getRecentPlays";
+import { getMood } from "./API_Scripts/getMood";
+import { getRecomend } from "./API_Scripts/getRecomend";
 
 import './dashboard.css'
 
@@ -17,7 +19,6 @@ import Recomend from './Components/Recomend';
 import Mood from "./Components/Mood";
 import Play from "./Components/Play";
 import Search from "./Components/Search";
-import { getMood } from "./API_Scripts/getMood";
 
 const clientId = 'c7d7db2ffd7e4d229d6c8977e5792dee';
 
@@ -28,7 +29,7 @@ function Dashboard() {
   const [currPlaylist, setCurrPlaylist] = useState(null);
   const [recentPlays, setRecentPlays] = useState(null);
   const [mood, setMood] = useState(null);
-
+  const [recomend, setRecomend] = useState([])
 
   const location = useLocation();
 
@@ -67,6 +68,8 @@ function Dashboard() {
           setRecentPlays(recent)
           const mood = await getMood(topTracks.items)
           setMood(mood);
+          const recomend = getRecomend(topTracks.items)
+          setRecomend(recomend)
         }
       }
 
@@ -82,7 +85,9 @@ function Dashboard() {
         const recent = await getRecentPlays(token)
         setRecentPlays(recent)
         const mood = await getMood(topTracks.items)
-          setMood(mood);
+        setMood(mood);
+        const recomend = getRecomend(topTracks.items)
+        setRecomend(recomend)
   
         return;
       }
@@ -103,6 +108,8 @@ function Dashboard() {
           setRecentPlays(recent)
           const mood = await getMood(topTracks.items)
           setMood(mood);
+          const recomend = getRecomend(topTracks.items)
+          setRecomend(recomend)
 
           return;
         }
@@ -118,7 +125,7 @@ function Dashboard() {
   }
 
   
-  console.log(mood)
+  console.log(recomend)
   return (
     <div className="dashboard">
       <Play />
@@ -149,11 +156,9 @@ function Dashboard() {
         </div>
         <div className="card" id='recomend'>
           <h1 className="header">Recomended Songs</h1>
-          <Recomend />
-          <Recomend />
-          <Recomend />
-          <Recomend />
-          <Recomend />
+          {recomend?.slice(0, 5).map((track) => {
+            <Recomend track={track} />
+          })}
         </div>
       </div>
       <div className="container2">
