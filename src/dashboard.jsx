@@ -31,7 +31,7 @@ function Dashboard() {
   const [recentPlays, setRecentPlays] = useState(null);
   const [mood, setMood] = useState(null);
   const [recomend, setRecomend] = useState([])
-  const [recomendSpodify, setRecomendSpodify] = useState[[]]
+  const [recomendSpodify, setRecomendSpodify] = useState([])
 
   const location = useLocation();
 
@@ -72,9 +72,16 @@ function Dashboard() {
           setMood(mood);
           const recomend = await getRecomend(topTracks.items)
           setRecomend(recomend)
-          setRecomendSpodify(recomend?.slice(0, 5).map((track) => {
-            return search(tokenData.access_token, track.similartracks?.track?.[0]?.name, 'track')?.tracks?.items?.[0]
-          }))
+          const resolvedTracks = await Promise.all(
+            recomend.slice(0, 5).map(async (track) => {
+              const trackName = track.similartracks?.track?.[0]?.name;
+              if (!trackName) return null;
+              const result = await search(tokenData.access_token, trackName, 'track');
+              return result?.tracks?.items?.[0] || null;
+            })
+          );
+          
+          setRecomendSpodify(resolvedTracks.filter(Boolean));
         }
       }
 
@@ -93,9 +100,16 @@ function Dashboard() {
         setMood(mood);
         const recomend = await getRecomend(topTracks.items)
         setRecomend(recomend)
-        setRecomendSpodify(recomend?.slice(0, 5).map((track) => {
-          return search(token, track.similartracks?.track?.[0]?.name, 'track')?.tracks?.items?.[0]
-        }))
+        const resolvedTracks = await Promise.all(
+          recomend.slice(0, 5).map(async (track) => {
+            const trackName = track.similartracks?.track?.[0]?.name;
+            if (!trackName) return null;
+            const result = await search(tokenData.access_token, trackName, 'track');
+            return result?.tracks?.items?.[0] || null;
+          })
+        );
+        
+        setRecomendSpodify(resolvedTracks.filter(Boolean));
   
         return;
       }
@@ -118,9 +132,16 @@ function Dashboard() {
           setMood(mood);
           const recomend = await getRecomend(topTracks.items)
           setRecomend(recomend)
-          setRecomendSpodify(recomend?.slice(0, 5)?.map((track) => {
-            return search(newTokenData, track.similartracks?.track?.[0]?.name, 'track')?.tracks?.items?.[0]
-          }))
+          const resolvedTracks = await Promise.all(
+            recomend.slice(0, 5).map(async (track) => {
+              const trackName = track.similartracks?.track?.[0]?.name;
+              if (!trackName) return null;
+              const result = await search(tokenData.access_token, trackName, 'track');
+              return result?.tracks?.items?.[0] || null;
+            })
+          );
+          
+          setRecomendSpodify(resolvedTracks.filter(Boolean));
 
           return;
         }
