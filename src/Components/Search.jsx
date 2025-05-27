@@ -17,6 +17,7 @@ function Search(props) {
   }
 
   const handleSearchChange = async (event) => {
+    console.log('ran')
     setSearchValue(event.target.value)
 
     if (selectedOption === 'Song') {
