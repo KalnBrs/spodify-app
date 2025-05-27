@@ -6,7 +6,7 @@ export async function getRecomend(tracks) {
 
   if (!tracks){ console.error('No top tracks'); return; }
 
-  tracks.split(0, 5).map(track => {
+  tracks.slice(0, 5).map(track => {
     const result = fetch(`https://ws.audioscrobbler.com/2.0/?method=track.getsimilar&artist=${encodeURIComponent(track?.artist?.name)}&track=${encodeURIComponent(track?.name)}&api_key=${api}&format=json`)
 
     returnArr.push(result.json())
