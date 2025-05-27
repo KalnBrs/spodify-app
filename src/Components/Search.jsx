@@ -44,19 +44,21 @@ function Search(props) {
 
   return (
     <div className='searchContainer'>
-      <input
-        type="search"
-        placeholder='search...'
-        className='searchbox'
-        value={searchValue}
-        onChange={(e) => setSearchValue(e.target.value)}
-      />
-      <select id="dropdown" value={selectedOption} onChange={handleChange}>
-        <option value="Song">Song</option>
-        <option value="Artist">Artist</option>
-        <option value="Album">Album</option>
-      </select>
-      {result}
+      <div>
+        <input
+          type="search"
+          placeholder='search...'
+          className='searchbox'
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+        />
+        <select id="dropdown" value={selectedOption} onChange={handleChange}>
+          <option value="Song">Song</option>
+          <option value="Artist">Artist</option>
+          <option value="Album">Album</option>
+        </select>
+      </div>
+      <div>{result}</div>
     </div>
   );
 }
