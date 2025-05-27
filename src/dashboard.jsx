@@ -31,6 +31,7 @@ function Dashboard() {
   const [recentPlays, setRecentPlays] = useState(null);
   const [mood, setMood] = useState(null);
   const [recomend, setRecomend] = useState([])
+  const [recomendSpodify, setRecomendSpodify] = useState[[]]
 
   const location = useLocation();
 
@@ -71,6 +72,9 @@ function Dashboard() {
           setMood(mood);
           const recomend = await getRecomend(topTracks.items)
           setRecomend(recomend)
+          setRecomendSpodify(recomend.slice(0, 5).map((track) => {
+            return search(tokenData.access_token, track.similartracks?.track?.[0]?.name, 'track')?.tracks?.items?.[0]
+          }))
         }
       }
 
@@ -89,6 +93,9 @@ function Dashboard() {
         setMood(mood);
         const recomend = await getRecomend(topTracks.items)
         setRecomend(recomend)
+        setRecomendSpodify(recomend.slice(0, 5).map((track) => {
+          return search(token, track.similartracks?.track?.[0]?.name, 'track')?.tracks?.items?.[0]
+        }))
   
         return;
       }
@@ -111,6 +118,9 @@ function Dashboard() {
           setMood(mood);
           const recomend = await getRecomend(topTracks.items)
           setRecomend(recomend)
+          setRecomendSpodify(recomend.slice(0, 5).map((track) => {
+            return search(newTokenData, track.similartracks?.track?.[0]?.name, 'track')?.tracks?.items?.[0]
+          }))
 
           return;
         }
@@ -155,9 +165,9 @@ function Dashboard() {
         </div>
         <div className="card" id='recomend'>
           <h1 className="header">Recomended Songs</h1>
-          {recomend?.slice(0, 5).map(async (track) => (
+          {recomendSpodify?.map((track) => (
             // track.simlartracks?.track?.[0]?.name
-            <Recomend track={await search(localStorage.getItem('access_token'), track.similartracks?.track?.[0]?.name, 'track')?.tracks?.items?.[0]} />
+            <Recomend track={track} />
           ))}
         </div>
       </div>
