@@ -17,11 +17,11 @@ function Song({ track }) {
           <p className='artist'>{artistName}</p>
         </div>
       </div>
-      <div className='buttonContainer'>
+      {/* <div className='buttonContainer'>
         <button className='queue'>
           <img src="/queue.svg" alt="Add to Queue" className='queue-icon' />
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }
