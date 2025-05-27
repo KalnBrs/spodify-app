@@ -8,10 +8,11 @@ import Artist from './Artist';
 import Playlist from './Playlist';
 
 function Search(props) {
-  const [selectedOption, setSelectedOption] = useState('');
+  const [selectedOption, setSelectedOption] = useState('Song');
   const [searchValue, setSearchValue] = useState('');
   const [result, setResult] = useState(null)
 
+  console.log(props.token)
   const handleChange = (event) => {
     setSelectedOption(event.target.value);
   }
