@@ -30,5 +30,5 @@ export async function getRecomend(tracks) {
   })
 
   const returnArr = await Promise.all(fetchTracks);
-  return returnArr.filter(Boolean);
+  return returnArr.filter(item => item !== null);
 }
