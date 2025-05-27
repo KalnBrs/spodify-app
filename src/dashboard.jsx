@@ -157,7 +157,7 @@ function Dashboard() {
           <h1 className="header">Recomended Songs</h1>
           {recomend?.slice(0, 5).map((track) => (
             // track.simlartracks?.track?.[0]?.name
-            <Recomend track={search(localStorage.get('access_token'), track.simlartracks?.track?.[0]?.name, 'track')?.items?.[0]} />
+            <Recomend track={search(localStorage.getItem('access_token'), track.simlartracks?.track?.[0]?.name, 'track')?.items?.[0]} />
           ))}
         </div>
       </div>
