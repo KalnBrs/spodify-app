@@ -70,7 +70,7 @@ button:focus-visible {
 }
 
 .center>h1 {
-  margin-bottom: 5vw;
+  margin-bottom: 2vw;
 }
 
 @media (prefers-color-scheme: light) {
