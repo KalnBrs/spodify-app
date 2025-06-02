@@ -69,6 +69,10 @@ button:focus-visible {
   align-items: center;
 }
 
+.center>h1 {
+  margin-bottom: 5vw;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
