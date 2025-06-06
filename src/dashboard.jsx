@@ -36,6 +36,32 @@ function Dashboard() {
   const location = useLocation();
 
   useEffect(() => {
+    async function updateValues(token) {
+      const profile = await fetchProfile(token);
+      setProfile(profile);
+      const topTracks = await getTop(token, 'tracks');
+      setTopTracks(topTracks);
+      const topArtist = await getTop(token, 'artists');
+      setTopArtist(topArtist)
+      const currPlaylist = await getCurrentUsersPlaylists(token)
+      setCurrPlaylist(currPlaylist);
+      const recent = await getRecentPlays(token)
+      setRecentPlays(recent)
+      const recomend = await getRecomend(topTracks.items)
+      setRecomend(recomend)
+      const resolvedTracks = await Promise.all(
+        recomend.slice(0, 5).map(async (track) => {
+          const trackName = track.similartracks?.track?.[0]?.name;
+          if (!trackName) return null;
+          const result = await search(token, trackName, 'track');
+          return result?.tracks?.items?.[0] || null;
+        })
+      );
+      setRecomendSpodify(resolvedTracks.filter(Boolean));
+      const mood = await getMood(topTracks.items)
+      setMood(mood);
+    }
+
     async function init() {
       const token = localStorage.getItem('access_token');
       const expiry = localStorage.getItem('token_expiry');
@@ -57,92 +83,20 @@ function Dashboard() {
 
           // Clean the URL
           window.history.replaceState({}, document.title, window.location.pathname);
-
-          const profile = await fetchProfile(tokenData.access_token);
-          setProfile(profile);
-          const topTracks = await getTop(tokenData.access_token, 'tracks');
-          setTopTracks(topTracks);
-          const topArtist = await getTop(tokenData.access_token, 'artists');
-          setTopArtist(topArtist)
-          const currPlaylist = await getCurrentUsersPlaylists(tokenData.access_token)
-          setCurrPlaylist(currPlaylist);
-          const recent = await getRecentPlays(tokenData.access_token)
-          setRecentPlays(recent)
-          const recomend = await getRecomend(topTracks.items)
-          setRecomend(recomend)
-          const resolvedTracks = await Promise.all(
-            recomend.slice(0, 5).map(async (track) => {
-              const trackName = track.similartracks?.track?.[0]?.name;
-              if (!trackName) return null;
-              const result = await search(tokenData.access_token, trackName, 'track');
-              return result?.tracks?.items?.[0] || null;
-            })
-          );
+          updateValues(tokenData.access_token)
           
-          setRecomendSpodify(resolvedTracks.filter(Boolean));
-          const mood = await getMood(topTracks.items)
-          setMood(mood);
         }
       }
 
       if (token && expiry && Date.now() < parseInt(expiry)) {
-        const fetchedProfile = await fetchProfile(token);
-        setProfile(fetchedProfile);
-        const topTracks = await getTop(token, 'tracks');
-        setTopTracks(topTracks);
-        const topArtist = await getTop(token, 'artists');
-        setTopArtist(topArtist)
-        const currPlaylist = await getCurrentUsersPlaylists(token)
-        setCurrPlaylist(currPlaylist);
-        const recent = await getRecentPlays(token)
-        setRecentPlays(recent)
-        const recomend = await getRecomend(topTracks.items)
-        setRecomend(recomend)
-        const resolvedTracks = await Promise.all(
-          recomend.slice(0, 5).map(async (track) => {
-            const trackName = track.similartracks?.track?.[0]?.name;
-            if (!trackName) return null;
-            const result = await search(token, trackName, 'track');
-            return result?.tracks?.items?.[0] || null;
-          })
-        );
-        
-        setRecomendSpodify(resolvedTracks.filter(Boolean));
-        const mood = await getMood(topTracks.items)
-        setMood(mood);
-  
+        updateValues(token)
         return;
       }
   
       if (refreshToken) {
         const newTokenData = await refreshAccessToken(clientId, refreshToken);
         if (newTokenData?.access_token) {
-            
-          const fetchedProfile = await fetchProfile(newTokenData);
-          setProfile(fetchedProfile);
-          const topTracks = await getTop(newTokenData, 'tracks');
-          setTopTracks(topTracks);
-          const topArtist = await getTop(newTokenData, 'artists');
-          setTopArtist(topArtist)
-          const currPlaylist = await getCurrentUsersPlaylists(newTokenData)
-          setCurrPlaylist(currPlaylist);
-          const recent = await getRecentPlays(newTokenData)
-          setRecentPlays(recent)
-          const recomend = await getRecomend(topTracks.items)
-          setRecomend(recomend)
-          const resolvedTracks = await Promise.all(
-            recomend.slice(0, 5).map(async (track) => {
-              const trackName = track.similartracks?.track?.[0]?.name;
-              if (!trackName) return null;
-              const result = await search(newTokenData, trackName, 'track');
-              return result?.tracks?.items?.[0] || null;
-            })
-          );
-          
-          setRecomendSpodify(resolvedTracks.filter(Boolean));
-          const mood = await getMood(topTracks.items)
-          setMood(mood);
-
+          updateValues(newTokenData)
           return;
         }
       }
