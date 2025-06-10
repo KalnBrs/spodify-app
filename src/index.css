@@ -32,7 +32,7 @@ body {
   display: flex;
   place-items: center;
   min-width: 320px;
-  min-height: 100vh;
+  min-height: 100%;
   background-color: #0A0C0E;
 }
 
@@ -62,7 +62,7 @@ button:focus-visible {
 
 .center {
   margin: auto;
-  margin-top: 25vw;
+  margin-top: 25%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -70,7 +70,7 @@ button:focus-visible {
 }
 
 .center>h1 {
-  margin-bottom: 2vw;
+  margin-bottom: 2%;
 }
 
 @media (prefers-color-scheme: light) {
